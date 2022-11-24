@@ -22,17 +22,16 @@ import java.util.ResourceBundle;
 /** This is my first javadoc comment */
 public class MainController implements Initializable {
 
-    public Label TheLabel;
     public TableView partsTable;
-    public TableColumn partID;
-    public TableColumn partName;
-    public TableColumn partInvent;
-    public TableColumn partPrice;
+    public TableColumn partIDCol;
+    public TableColumn partNameCol;
+    public TableColumn partStockCol;
+    public TableColumn partPriceCol;
     public TableView productsTable;
-    public TableColumn prodID;
-    public TableColumn prodName;
-    public TableColumn prodInvent;
-    public TableColumn prodPrice;
+    public TableColumn prodIDCol;
+    public TableColumn prodNameCol;
+    public TableColumn prodStockCol;
+    public TableColumn prodPriceCol;
     public Button addPart;
     public Button modPart;
     public Button delPart;
@@ -41,15 +40,15 @@ public class MainController implements Initializable {
     public Button delProd;
     public Button exit;
 
-    private ObservableList<Player> parts = FXCollections.observableArrayList();
-    private ObservableList<Player> products = FXCollections.observableArrayList();
+    private ObservableList<Part> parts = FXCollections.observableArrayList();
+    private ObservableList<Product> products = FXCollections.observableArrayList();
 
     @FXML
     private TextField searchParts;
     @FXML
     private TextField searchProds;
 
-    private ObservableList<Part> searchByName(String partialName, ObservableList list) {
+    private ObservableList<Part> searchByPartName(String partialName, ObservableList list) {
         ObservableList<Part> namedParts = FXCollections.observableArrayList();
         ObservableList<Part> allParts = list;
         for(Part part : allParts) {
@@ -59,65 +58,84 @@ public class MainController implements Initializable {
         }
         return namedParts;
     }
-    private Part searchByJersey(int jersey, ObservableList list) {
+    private ObservableList<Product> searchByProductName(String partialName, ObservableList list) {
+        ObservableList<Product> namedProducts = FXCollections.observableArrayList();
+        ObservableList<Product> allProducts = list;
+        for(Product product : allProducts) {
+            if (product.getName().contains(partialName)) {
+                namedProducts.add(product);
+            }
+
+        }
+        return namedProducts;
+    }
+    private Part searchByPartId(int id, ObservableList list) {
         ObservableList<Part> allParts = list;
         for(Part part : allParts) {
-            if (part.getId() == jersey) {
+            if (part.getId() == id) {
                 return part;
+            }
+        }
+        return null;
+    }
+    private Product searchByProductId(int id, ObservableList list) {
+        ObservableList<Product> allProducts = list;
+        for(Product product : allProducts) {
+            if (product.getId() == id) {
+                return product;
             }
         }
         return null;
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        partsTable.add(new Part(12,"Joe",34,"team1"));
-        partsTable.add(new Part(33,"Steve",3,"team2"));
-        partsTable.add(new Part(44,"Rudy",34,"team1"));
-        partsTable.add(new Part(13,"Susan",3,"team2"));
-        productsTable.add(new Part(23,"Jennifer",34,"team3"));
-        productsTable.add(new Part(48,"Bob",3,"team2"));
-        productsTable.add(new Part(5,"Robert",34,"team1"));
-        productsTable.add(new Part(32,"Jose",3,"team2"));
+//        parts.add(new Part(12,"Joe",34,1));
+//        parts.add(new Part(33,"Steve",3,2));
+//        parts.add(new Part(44,"Rudy",34,3));
+//        parts.add(new Part(13,"Susan",3,4));
+        products.add(new Product(23,"Jennifer",2,2, 1, 4));
+        products.add(new Product(48,"Bob",3,10, 2, 60));
+        products.add(new Product(5,"Robert",4,5, 2, 20));
+        products.add(new Product(32,"Jose",1,1, 1, 40));
 
-        parts.setItems(partsTable);
-        products.setItems(productsTable);
+        partsTable.setItems(parts);
+        productsTable.setItems(products);
 
-        leftJerseyCol.setCellValueFactory(new PropertyValueFactory<>("jersey"));
-        leftNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-        leftTeamCol.setCellValueFactory(new PropertyValueFactory<>("team"));
-        leftPointsCol.setCellValueFactory(new PropertyValueFactory<>("points"));
-        rightJerseyCol.setCellValueFactory(new PropertyValueFactory<>("jersey"));
-        rightNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-        rightTeamCol.setCellValueFactory(new PropertyValueFactory<>("team"));
-        rightPointsCol.setCellValueFactory(new PropertyValueFactory<>("points"));
+        partIDCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        partStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        partPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        prodIDCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        prodNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        prodStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        prodPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         searchParts.textProperty().addListener((obs, oldText, newText) -> {
-            ObservableList newPlayers = searchByName(newText, leftPlayers);
-
-            if (newPlayers.size() == 0) {
+            ObservableList newParts = searchByPartName(newText, parts);
+            if (newParts.size() == 0) {
                 try {
-                    int jersey = Integer.parseInt((newText));
-                    newPlayers.add(searchByJersey(jersey, leftPlayers));
+                    int id = Integer.parseInt((newText));
+                    newParts.add(searchByPartId(id, parts));
                 }
                 catch (NumberFormatException e) {
                     //ignore exception
                 }
             }
-            leftSide.setItems(newPlayers);
+            partsTable.setItems(newParts);
         });
 
         searchProds.textProperty().addListener((obs, oldText, newText) -> {
-            ObservableList newPlayers = searchByName(newText, rightPlayers);
-            if (newPlayers.size() == 0) {
+            ObservableList newProducts = searchByProductName(newText, products);
+            if (newProducts.size() == 0) {
                 try {
-                    int jersey = Integer.parseInt((newText));
-                    newPlayers.add(searchByJersey(jersey, rightPlayers));
+                    int id = Integer.parseInt((newText));
+                    newProducts.add(searchByProductId(id, products));
                 }
                 catch (NumberFormatException e) {
                     //ignore exception
                 }
             }
-            products.setItems(newPlayers);
+            productsTable.setItems(newProducts);
         });
 
     }

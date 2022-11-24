@@ -28,12 +28,12 @@
                   <TextField fx:id="searchParts" />
                </children>
             </HBox>
-            <TableView prefHeight="439.0" prefWidth="600.0">
+            <TableView fx:id="partsTable" prefHeight="439.0" prefWidth="600.0">
               <columns>
-                <TableColumn fx:id="partID" prefWidth="125.0" text="Part ID" />
-                <TableColumn fx:id="partName" prefWidth="125.0" text="Part Name" />
-                  <TableColumn fx:id="partInvent" prefWidth="125.0" text="Inventory" />
-                  <TableColumn fx:id="partPrice" prefWidth="125.0" text="Price per Unit" />
+                <TableColumn fx:id="partIDCol" prefWidth="125.0" text="Part ID" />
+                <TableColumn fx:id="partNameCol" prefWidth="125.0" text="Part Name" />
+                  <TableColumn fx:id="partStockCol" prefWidth="125.0" text="Inventory" />
+                  <TableColumn fx:id="partPriceCol" prefWidth="125.0" text="Price per Unit" />
               </columns>
             </TableView>
             <HBox prefHeight="100.0" prefWidth="200.0">
@@ -58,12 +58,12 @@
                   <TextField fx:id="searchProds" />
                </children>
             </HBox>
-            <TableView prefHeight="439.0" prefWidth="600.0">
+            <TableView fx:id="productsTable" prefHeight="439.0" prefWidth="600.0">
                <columns>
-                  <TableColumn fx:id="prodID" prefWidth="125.0" text="Product ID" />
-                  <TableColumn fx:id="prodName" prefWidth="125.0" text="Product Name" />
-                  <TableColumn fx:id="prodInvent" prefWidth="125.0" text="Inventory" />
-                  <TableColumn fx:id="prodPrice" prefWidth="125.0" text="Price per Unit" />
+                  <TableColumn fx:id="prodIDCol" prefWidth="125.0" text="Product ID" />
+                  <TableColumn fx:id="prodNameCol" prefWidth="125.0" text="Product Name" />
+                  <TableColumn fx:id="prodStockCol" prefWidth="125.0" text="Inventory" />
+                  <TableColumn fx:id="prodPriceCol" prefWidth="125.0" text="Price per Unit" />
                </columns>
             </TableView>
             <HBox prefHeight="100.0" prefWidth="200.0">
