@@ -23,78 +23,64 @@ import java.util.ResourceBundle;
 public class MainController implements Initializable {
 
     public Label TheLabel;
-    public TableView leftSide;
-    public TableColumn leftJerseyCol;
-    public TableColumn leftNameCol;
-    public TableColumn leftPointsCol;
-    public TableColumn leftTeamCol;
-    public TableView rightSide;
-    public TableColumn rightJerseyCol;
-    public TableColumn rightNameCol;
-    public TableColumn rightPointsCol;
-    public TableColumn rightTeamCol;
-    public Button goRight;
-    public Button goLeft;
+    public TableView partsTable;
+    public TableColumn partID;
+    public TableColumn partName;
+    public TableColumn partInvent;
+    public TableColumn partPrice;
+    public TableView productsTable;
+    public TableColumn prodID;
+    public TableColumn prodName;
+    public TableColumn prodInvent;
+    public TableColumn prodPrice;
+    public Button addPart;
+    public Button modPart;
+    public Button delPart;
+    public Button addProd;
+    public Button modProd;
+    public Button delProd;
+    public Button exit;
 
-    private ObservableList<Player> leftPlayers = FXCollections.observableArrayList();
-    private ObservableList<Player> rightPlayers = FXCollections.observableArrayList();
+    private ObservableList<Player> parts = FXCollections.observableArrayList();
+    private ObservableList<Player> products = FXCollections.observableArrayList();
 
-    public void onGoRight(ActionEvent actionEvent) {
-        Player SP = (Player)leftSide.getSelectionModel().getSelectedItem();
-        if (SP == null) {
-            return;
-        } else {
-            leftPlayers.remove(SP);
-            rightPlayers.add(SP);
-        }
-    }
-
-    public void onGoLeft(ActionEvent actionEvent) {
-        Player SP = (Player)rightSide.getSelectionModel().getSelectedItem();
-        if (SP == null) {
-            return;
-        } else {
-            rightPlayers.remove(SP);
-            leftPlayers.add(SP);
-        }
-    }
     @FXML
     private TextField searchParts;
     @FXML
     private TextField searchProds;
 
-    private ObservableList<Player> searchByName(String partialName, ObservableList list) {
-        ObservableList<Player> namedPlayers = FXCollections.observableArrayList();
-        ObservableList<Player> allPlayers = list;
-        for(Player player : allPlayers) {
-            if (player.getName().contains(partialName)) {
-                namedPlayers.add(player);
+    private ObservableList<Part> searchByName(String partialName, ObservableList list) {
+        ObservableList<Part> namedParts = FXCollections.observableArrayList();
+        ObservableList<Part> allParts = list;
+        for(Part part : allParts) {
+            if (part.getName().contains(partialName)) {
+                namedParts.add(part);
             }
         }
-        return namedPlayers;
+        return namedParts;
     }
-    private Player searchByJersey(int jersey, ObservableList list) {
-        ObservableList<Player> allPlayers = list;
-        for(Player player : allPlayers) {
-            if (player.getJersey() == jersey) {
-                return player;
+    private Part searchByJersey(int jersey, ObservableList list) {
+        ObservableList<Part> allParts = list;
+        for(Part part : allParts) {
+            if (part.getId() == jersey) {
+                return part;
             }
         }
         return null;
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        leftPlayers.add(new Player(12,"Joe",34,"team1"));
-        leftPlayers.add(new Player(33,"Steve",3,"team2"));
-        leftPlayers.add(new Player(44,"Rudy",34,"team1"));
-        leftPlayers.add(new Player(13,"Susan",3,"team2"));
-        rightPlayers.add(new Player(23,"Jennifer",34,"team3"));
-        rightPlayers.add(new Player(48,"Bob",3,"team2"));
-        rightPlayers.add(new Player(5,"Robert",34,"team1"));
-        rightPlayers.add(new Player(32,"Jose",3,"team2"));
+        partsTable.add(new Part(12,"Joe",34,"team1"));
+        partsTable.add(new Part(33,"Steve",3,"team2"));
+        partsTable.add(new Part(44,"Rudy",34,"team1"));
+        partsTable.add(new Part(13,"Susan",3,"team2"));
+        productsTable.add(new Part(23,"Jennifer",34,"team3"));
+        productsTable.add(new Part(48,"Bob",3,"team2"));
+        productsTable.add(new Part(5,"Robert",34,"team1"));
+        productsTable.add(new Part(32,"Jose",3,"team2"));
 
-        leftSide.setItems(leftPlayers);
-        rightSide.setItems(rightPlayers);
+        parts.setItems(partsTable);
+        products.setItems(productsTable);
 
         leftJerseyCol.setCellValueFactory(new PropertyValueFactory<>("jersey"));
         leftNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -131,7 +117,7 @@ public class MainController implements Initializable {
                     //ignore exception
                 }
             }
-            rightSide.setItems(newPlayers);
+            products.setItems(newPlayers);
         });
 
     }

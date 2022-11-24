@@ -1,25 +1,25 @@
 package amalfi.wgu_c482;
 
 public class Player {
-    private int jersey;
+    private int id;
     private String name;
-    private int points;
-    private String team;
+    private int invent;
+    private String price;
 
-    public Player(int jersey, String name, int points, String team) {
-        this.jersey = jersey;
+    public Player(int id, String name, int invent, String price) {
+        this.id = id;
         this.name = name;
-        this.points = points;
-        this.team = team;
+        this.invent = invent;
+        this.price = price;
 
     }
 
-    public int getJersey() {
-        return jersey;
+    public int getId() {
+        return id;
     }
 
-    public void setJersey(int jersey) {
-        this.jersey = jersey;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -30,19 +30,19 @@ public class Player {
         this.name = name;
     }
 
-    public int getPoints() {
-        return points;
+    public int getInvent() {
+        return invent;
     }
 
-    public void setPoints(int points) {
-        this.points = points;
+    public void setInvent(int invent) {
+        this.invent = invent;
     }
 
-    public String getTeam() {
-        return team;
+    public String getPrice() {
+        return price;
     }
 
-    public void setTeam(String team) {
-        this.team = team;
+    public void setPrice(String price) {
+        this.price = price;
     }
 }
