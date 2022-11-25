@@ -1,5 +1,6 @@
 package amalfi.wgu_c482;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -8,7 +9,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.PointLight;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -21,72 +21,6 @@ import java.util.ResourceBundle;
 
 /** This is my first javadoc comment */
 public class MainController implements Initializable {
-
-    public TableView partsTable;
-    public TableColumn partIDCol;
-    public TableColumn partNameCol;
-    public TableColumn partStockCol;
-    public TableColumn partPriceCol;
-    public TableView productsTable;
-    public TableColumn prodIDCol;
-    public TableColumn prodNameCol;
-    public TableColumn prodStockCol;
-    public TableColumn prodPriceCol;
-    public Button addPart;
-    public Button modPart;
-    public Button delPart;
-    public Button addProd;
-    public Button modProd;
-    public Button delProd;
-    public Button exit;
-
-    private ObservableList<Part> parts = FXCollections.observableArrayList();
-    private ObservableList<Product> products = FXCollections.observableArrayList();
-
-    @FXML
-    private TextField searchParts;
-    @FXML
-    private TextField searchProds;
-
-    private ObservableList<Part> searchByPartName(String partialName, ObservableList list) {
-        ObservableList<Part> namedParts = FXCollections.observableArrayList();
-        ObservableList<Part> allParts = list;
-        for(Part part : allParts) {
-            if (part.getName().contains(partialName)) {
-                namedParts.add(part);
-            }
-        }
-        return namedParts;
-    }
-    private ObservableList<Product> searchByProductName(String partialName, ObservableList list) {
-        ObservableList<Product> namedProducts = FXCollections.observableArrayList();
-        ObservableList<Product> allProducts = list;
-        for(Product product : allProducts) {
-            if (product.getName().contains(partialName)) {
-                namedProducts.add(product);
-            }
-
-        }
-        return namedProducts;
-    }
-    private Part searchByPartId(int id, ObservableList list) {
-        ObservableList<Part> allParts = list;
-        for(Part part : allParts) {
-            if (part.getId() == id) {
-                return part;
-            }
-        }
-        return null;
-    }
-    private Product searchByProductId(int id, ObservableList list) {
-        ObservableList<Product> allProducts = list;
-        for(Product product : allProducts) {
-            if (product.getId() == id) {
-                return product;
-            }
-        }
-        return null;
-    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 //        parts.add(new Part(12,"Joe",34,1));
@@ -111,7 +45,7 @@ public class MainController implements Initializable {
         prodPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         searchParts.textProperty().addListener((obs, oldText, newText) -> {
-            ObservableList newParts = searchByPartName(newText, parts);
+            ObservableList<Part> newParts = searchByPartName(newText, parts);
             if (newParts.size() == 0) {
                 try {
                     int id = Integer.parseInt((newText));
@@ -125,7 +59,7 @@ public class MainController implements Initializable {
         });
 
         searchProds.textProperty().addListener((obs, oldText, newText) -> {
-            ObservableList newProducts = searchByProductName(newText, products);
+            ObservableList<Product> newProducts = searchByProductName(newText, products);
             if (newProducts.size() == 0) {
                 try {
                     int id = Integer.parseInt((newText));
@@ -140,24 +74,112 @@ public class MainController implements Initializable {
 
     }
 
-    public void onAddPart(ActionEvent actionEvent) {
+    public TableView<Part> partsTable;
+    public TableColumn<Part, Integer> partIDCol;
+    public TableColumn<Part, String> partNameCol;
+    public TableColumn<Part, Integer> partStockCol;
+    public TableColumn<Part, Double> partPriceCol;
+    public TableView<Product> productsTable;
+    public TableColumn<Part, Integer> prodIDCol;
+    public TableColumn<Part, String> prodNameCol;
+    public TableColumn<Part, Integer> prodStockCol;
+    public TableColumn<Part, Double> prodPriceCol;
+    public Button addPart;
+    public Button modPart;
+    public Button delPart;
+    public Button addProd;
+    public Button modProd;
+    public Button delProd;
+    public Button exit;
+
+    private ObservableList<Part> parts = FXCollections.observableArrayList();
+    private ObservableList<Product> products = FXCollections.observableArrayList();
+
+    @FXML
+    private TextField searchParts;
+    @FXML
+    private TextField searchProds;
+
+    private ObservableList<Part> searchByPartName(String partialName, ObservableList<Part> list) {
+        ObservableList<Part> namedParts = FXCollections.observableArrayList();
+        for(Part part : list) {
+            if (part.getName().contains(partialName)) {
+                namedParts.add(part);
+            }
+        }
+        return namedParts;
+    }
+    private ObservableList<Product> searchByProductName(String partialName, ObservableList<Product> list) {
+        ObservableList<Product> namedProducts = FXCollections.observableArrayList();
+        for(Product product : list) {
+            if (product.getName().contains(partialName)) {
+                namedProducts.add(product);
+            }
+
+        }
+        return namedProducts;
+    }
+    private Part searchByPartId(int id, ObservableList<Part> list) {
+        for(Part part : list) {
+            if (part.getId() == id) {
+                return part;
+            }
+        }
+        return null;
+    }
+    private Product searchByProductId(int id, ObservableList<Product> list) {
+       for(Product product : list) {
+            if (product.getId() == id) {
+                return product;
+            }
+        }
+        return null;
     }
 
-    public void onModPart(ActionEvent actionEvent) {
+    public void onAddPart(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/amalfi/wgu_c482/addPart.fxml")));
+        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 600, 700);
+        stage.setScene(scene);
+        stage.show();
     }
 
-    public void onDelPart(ActionEvent actionEvent) {
+    public void onModPart(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/amalfi/wgu_c482/modPart.fxml")));
+        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 600, 700);
+        stage.setScene(scene);
+        stage.show();
     }
 
-    public void onExit(ActionEvent actionEvent) {
+    public void onDelPart(ActionEvent actionEvent) throws IOException {
+
     }
 
-    public void onAddProd(ActionEvent actionEvent) {
+    public void onExit() {
+        Platform.exit();
     }
 
-    public void onModProd(ActionEvent actionEvent) {
+    public void onAddProd(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/amalfi/wgu_c482/addProduct.fxml")));
+        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 800, 500);
+        stage.setScene(scene);
+        stage.show();
     }
 
-    public void onDelProd(ActionEvent actionEvent) {
+    public void onModProd(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/amalfi/wgu_c482/modProduct.fxml")));
+        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 800, 500);
+        stage.setScene(scene);
+        stage.show();
     }
+
+    public void onDelProd(ActionEvent actionEvent) throws IOException {
+    }
+
+
+
+
 }
