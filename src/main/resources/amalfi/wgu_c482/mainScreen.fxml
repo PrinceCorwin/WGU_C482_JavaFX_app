@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="amalfi.wgu_c482.MainController">
   <columnConstraints>
@@ -10,25 +12,40 @@
   </columnConstraints>
   <rowConstraints>
     <RowConstraints maxHeight="261.4" minHeight="0.0" prefHeight="32.39998855590818" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="532.8" minHeight="10.0" prefHeight="500.4000114440918" vgrow="SOMETIMES" />
-    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="532.8" minHeight="10.0" prefHeight="475.8" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="65.39999999999998" minHeight="10.0" prefHeight="65.39999999999998" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <HBox prefHeight="100.0" prefWidth="200.0" />
       <StackPane prefHeight="150.0" prefWidth="200.0">
          <children>
-            <Label text="Inventory Management System" />
+            <Label text="Inventory Management System" StackPane.alignment="CENTER" />
          </children>
       </StackPane>
       <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
          <children>
-            <HBox prefHeight="100.0" prefWidth="200.0">
+            <HBox prefHeight="100.0" prefWidth="600.0">
                <children>
-                  <Label text="Parts" />
-                  <TextField fx:id="searchParts" />
+                  <StackPane prefHeight="59.0" prefWidth="200.0">
+                     <children>
+                        <Label text="Parts" StackPane.alignment="CENTER_LEFT">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </StackPane>
+                  <StackPane prefHeight="59.0" prefWidth="400.0">
+                     <children>
+                        <TextField fx:id="searchParts" maxWidth="-Infinity" prefHeight="26.0" prefWidth="200.0" promptText="Search by Part ID or Name" StackPane.alignment="CENTER">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </StackPane>
                </children>
             </HBox>
-            <TableView fx:id="partsTable" prefHeight="439.0" prefWidth="600.0">
+            <TableView fx:id="partsTable" prefHeight="400.0" prefWidth="600.0">
               <columns>
                 <TableColumn fx:id="partIDCol" prefWidth="125.0" text="Part ID" />
                 <TableColumn fx:id="partNameCol" prefWidth="125.0" text="Part Name" />
@@ -45,20 +62,31 @@
             </HBox>
          </children>
       </VBox>
-      <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-         <children>
-            <Button fx:id="exit" mnemonicParsing="false" onAction="#onExit" text="Exit" />
-         </children>
-      </StackPane>
       <VBox layoutX="10.0" layoutY="55.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <children>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="Products" />
-                  <TextField fx:id="searchProds" />
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <Label prefWidth="200.0" text="Products" StackPane.alignment="CENTER_LEFT">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </StackPane>
+                  <StackPane alignment="CENTER_RIGHT" prefHeight="150.0" prefWidth="400.0">
+                     <children>
+                        <TextField fx:id="searchProds" maxWidth="-Infinity" prefWidth="200.0" promptText="Search by Product ID or Name" StackPane.alignment="CENTER">
+                           <font>
+                              <Font size="12.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </StackPane>
                </children>
             </HBox>
-            <TableView fx:id="productsTable" prefHeight="439.0" prefWidth="600.0">
+            <TableView fx:id="productsTable" prefHeight="400.0" prefWidth="600.0">
                <columns>
                   <TableColumn fx:id="prodIDCol" prefWidth="125.0" text="Product ID" />
                   <TableColumn fx:id="prodNameCol" prefWidth="125.0" text="Product Name" />
@@ -75,5 +103,23 @@
             </HBox>
          </children>
       </VBox>
+      <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="2" />
+      <HBox prefHeight="100.0" prefWidth="600.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+         <children>
+            <StackPane prefHeight="66.0" prefWidth="400.0">
+               <children>
+                  <Label text="Associated parts must be removed to delete Product" textFill="#cf0000" StackPane.alignment="CENTER_LEFT" />
+               </children>
+            </StackPane>
+            <StackPane prefHeight="66.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="exit" mnemonicParsing="false" onAction="#onExit" text="Exit" StackPane.alignment="CENTER" />
+               </children>
+            </StackPane>
+         </children>
+      </HBox>
    </children>
+   <padding>
+      <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+   </padding>
 </GridPane>
