@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -15,6 +16,24 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class ModProductController implements Initializable {
+
+
+    public StackPane exceptStockIntPane;
+    public Label exceptStockIntLabel;
+    public StackPane exceptBetweenMinMaxPane;
+    public Label exceptBetweenMinMaxLabel;
+    public StackPane exceptMinMaxPane;
+    public Label exceptMinMaxLabel;
+    public StackPane exceptProdNamePane;
+    public Label exceptProdNameLabel;
+    public StackPane exceptPriceDoublePane;
+    public Label exceptPriceDoubleLabel;
+    public StackPane exceptMaxStockIntPane;
+    public Label exceptMaxStockIntLabel;
+    public StackPane exceptMinStockIntPane;
+    public Label exceptMinStockIntLabel;
+    public Button prodSave;
+    public Button prodCancel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -25,15 +44,9 @@ public class ModProductController implements Initializable {
     public TextField prodPriceField;
     public TextField prodMaxField;
     public TextField prodMinField;
-    public Label exceptMinMax;
-    public Label exceptBetweenMinMax;
-    public Label exceptProdName;
-    public Label exceptPriceDouble;
-    public Label exceptMaxStockInt;
-    public Label exceptStockInt;
     public TextField searchParts;
-    public TableView<Part> partsTableAssoc;
     public TableView<Part> partsTableSearch;
+    public TableView<Part> partsTableAssoc;
     public TableColumn<Part, Integer> partIdSearchCol;
     public TableColumn<Part, String> partNameSearchCol;
     public TableColumn<Part, Integer> partStockSearchCol;
@@ -44,8 +57,6 @@ public class ModProductController implements Initializable {
     public TableColumn<Part, Integer> partStockAssocCol;
     public TableColumn<Part, Double> partPriceAssocCol;
     public Button removeAssocPart;
-    public Button modProdSave;
-    public Button modProdCancel;
 
     public void onAddToProd(ActionEvent actionEvent) throws IOException {
     }
@@ -53,13 +64,6 @@ public class ModProductController implements Initializable {
     public void onRemoveAssocPart(ActionEvent actionEvent) throws IOException {
     }
 
-    public void onModProdSave(ActionEvent actionEvent) throws IOException {
-        backToMain(actionEvent);
-    }
-
-    public void onModProdCancel(ActionEvent actionEvent) throws IOException {
-        backToMain(actionEvent);
-    }
     private void backToMain(ActionEvent e) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/amalfi/wgu_c482/mainScreen.fxml")));
         Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
@@ -69,5 +73,13 @@ public class ModProductController implements Initializable {
     }
 
 
+    public void onProdSave(ActionEvent actionEvent) throws IOException {
+        backToMain(actionEvent);
 
+    }
+
+    public void onProdCancel(ActionEvent actionEvent) throws IOException {
+        backToMain(actionEvent);
+
+    }
 }

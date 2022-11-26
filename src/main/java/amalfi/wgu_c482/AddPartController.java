@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,46 +19,49 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class AddPartController implements Initializable {
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-    }
-
-    public RadioButton addOutSourcedRadio;
-    public RadioButton addInHouseRadio;
+    public Label machineIdLabel;
     public TextField partNameField;
     public TextField partStockField;
     public TextField partPriceField;
     public TextField partMaxField;
     public TextField machineField;
     public TextField partMinField;
-    public TextField companyField;
-    public Button AddPartSave;
-    public Button addPartCancel;
-    public Label machineIdLabel;
     public Label companyNameLabel;
-    public Label exceptCompName;
-    public Label exceptBetweenMinMax;
-    public Label exceptMinMax;
-    public Label exceptPartName;
-    public Label exceptStockInt;
-    public Label exceptPriceDouble;
-    public Label exceptMaxStockInt;
-    public Label exceptMachineInt;
-    public Label exceptMinStockInt;
+    public TextField companyField;
+    public Button partSave;
+    public Button partCancel;
+    public StackPane exceptCompNamePane;
+    public Label exceptCompNameLabel;
+    public StackPane exceptBetweenMinMaxPane;
+    public Label exceptBetweenMinMaxLabel;
+    public StackPane exceptMinMaxPane;
+    public Label exceptMinMaxLabel;
+    public StackPane exceptPartNamePane;
+    public Label exceptPartNameLabel;
+    public StackPane exceptStockIntPane;
+    public Label exceptStockIntLabel;
+    public StackPane exceptPriceDoublePane;
+    public Label exceptPriceDoubleLabel;
+    public StackPane exceptMaxStockIntPane;
+    public Label exceptMaxStockIntLabel;
+    public StackPane exceptMachineIntPane;
+    public Label exceptMachineIntLabel;
+    public StackPane exceptMinStockIntPane;
+    public Label exceptMinStockIntLabel;
+    public RadioButton inHouseRadio;
+    public RadioButton outSourcedRadio;
 
-    public void onAddInHouseRadio(ActionEvent actionEvent) throws IOException {
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
     }
 
-    public void onAddOutsourcedRadio(ActionEvent actionEvent) throws IOException {
-    }
-
-    public void onAddPartSave(ActionEvent actionEvent) throws IOException {
+    public void onPartSave(ActionEvent actionEvent) throws IOException {
         backToMain(actionEvent);
+
     }
 
-    public void onAddPartCancel(ActionEvent actionEvent) throws IOException {
+    public void onPartCancel(ActionEvent actionEvent) throws IOException {
         backToMain(actionEvent);
     }
     private void backToMain(ActionEvent e) throws IOException {
@@ -66,5 +70,11 @@ public class AddPartController implements Initializable {
         Scene scene = new Scene(root, 1200, 600);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void onInHouseRadio(ActionEvent actionEvent) throws IOException {
+    }
+
+    public void onOutsourcedRadio(ActionEvent actionEvent) throws IOException {
     }
 }

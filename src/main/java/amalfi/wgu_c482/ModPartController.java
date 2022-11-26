@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,8 +19,6 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class ModPartController implements Initializable {
-    public RadioButton modInHouseRadio;
-    public RadioButton modOutSourcedRadio;
     public Label machineIdLabel;
     public TextField partNameField;
     public TextField partStockField;
@@ -29,34 +28,40 @@ public class ModPartController implements Initializable {
     public TextField partMinField;
     public Label companyNameLabel;
     public TextField companyField;
-    public Button AddPartSave;
-    public Button addPartCancel;
-    public Label exceptCompName;
-    public Label exceptBetweenMinMax;
-    public Label exceptMinMax;
-    public Label exceptPartName;
-    public Label exceptStockInt;
-    public Label exceptPriceDouble;
-    public Label exceptMaxStockInt;
-    public Label exceptMachineInt;
-    public Label exceptMinStockInt;
+    public Button partSave;
+    public Button partCancel;
+    public StackPane exceptCompNamePane;
+    public Label exceptCompNameLabel;
+    public StackPane exceptBetweenMinMaxPane;
+    public Label exceptBetweenMinMaxLabel;
+    public StackPane exceptMinMaxPane;
+    public Label exceptMinMaxLabel;
+    public StackPane exceptPartNamePane;
+    public Label exceptPartNameLabel;
+    public StackPane exceptStockIntPane;
+    public Label exceptStockIntLabel;
+    public StackPane exceptPriceDoublePane;
+    public Label exceptPriceDoubleLabel;
+    public StackPane exceptMaxStockIntPane;
+    public Label exceptMaxStockIntLabel;
+    public StackPane exceptMachineIntPane;
+    public Label exceptMachineIntLabel;
+    public StackPane exceptMinStockIntPane;
+    public Label exceptMinStockIntLabel;
+    public RadioButton inHouseRadio;
+    public RadioButton outSourcedRadio;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
     }
-    public void onModInHouseRadio(ActionEvent actionEvent) throws IOException {
-    }
 
-    public void onModOutsourcedRadio(ActionEvent actionEvent) throws IOException {
-    }
-
-    public void onModPartSave(ActionEvent actionEvent) throws IOException {
+    public void onPartSave(ActionEvent actionEvent) throws IOException {
         backToMain(actionEvent);
 
     }
 
-    public void onModPartCancel(ActionEvent actionEvent) throws IOException {
+    public void onPartCancel(ActionEvent actionEvent) throws IOException {
         backToMain(actionEvent);
     }
     private void backToMain(ActionEvent e) throws IOException {
@@ -67,4 +72,9 @@ public class ModPartController implements Initializable {
         stage.show();
     }
 
+    public void onInHouseRadio(ActionEvent actionEvent) throws IOException {
+    }
+
+    public void onOutsourcedRadio(ActionEvent actionEvent) throws IOException {
+    }
 }

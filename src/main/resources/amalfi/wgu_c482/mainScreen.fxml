@@ -5,98 +5,94 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0"
-          prefWidth="1200.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="amalfi.wgu_c482.MainController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="amalfi.wgu_c482.MainController">
    <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
    </columnConstraints>
    <rowConstraints>
-      <RowConstraints maxHeight="261.4" minHeight="0.0" prefHeight="32.39998855590818" vgrow="SOMETIMES"/>
-      <RowConstraints maxHeight="532.8" minHeight="10.0" prefHeight="475.8" vgrow="SOMETIMES"/>
-      <RowConstraints maxHeight="65.39999999999998" minHeight="10.0" prefHeight="65.39999999999998" vgrow="SOMETIMES"/>
+      <RowConstraints maxHeight="261.4" minHeight="0.0" prefHeight="32.39998855590818" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="532.8" minHeight="10.0" prefHeight="475.8" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="65.39999999999998" minHeight="10.0" prefHeight="65.39999999999998" vgrow="SOMETIMES" />
    </rowConstraints>
    <padding>
-      <Insets bottom="10.0" left="20.0" right="20.0" top="10.0"/>
+      <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
    </padding>
    <StackPane prefHeight="150.0" prefWidth="200.0">
-      <Label text="Inventory Management System" StackPane.alignment="CENTER"/>
+      <Label text="Inventory Management System" StackPane.alignment="CENTER">
+         <font>
+            <Font size="24.0" />
+         </font></Label>
    </StackPane>
    <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
       <HBox prefHeight="100.0" prefWidth="600.0">
          <StackPane prefHeight="59.0" prefWidth="200.0">
             <Label text="Parts" StackPane.alignment="CENTER_LEFT">
                <font>
-                  <Font name="System Bold" size="18.0"/>
+                  <Font name="System Bold" size="18.0" />
                </font>
             </Label>
          </StackPane>
          <StackPane prefHeight="59.0" prefWidth="400.0">
-            <TextField fx:id="searchParts" maxWidth="-Infinity" prefHeight="26.0" prefWidth="200.0"
-                       promptText="Search by Part ID or Name" StackPane.alignment="CENTER">
+            <TextField fx:id="searchParts" maxWidth="-Infinity" prefHeight="26.0" prefWidth="200.0" promptText="Search by Part ID or Name" StackPane.alignment="CENTER">
                <font>
-                  <Font size="12.0"/>
+                  <Font size="12.0" />
                </font>
             </TextField>
          </StackPane>
       </HBox>
       <TableView fx:id="partsTable" prefHeight="400.0" prefWidth="600.0">
          <columns>
-            <TableColumn fx:id="partIDCol" prefWidth="125.0" text="Part ID"/>
-            <TableColumn fx:id="partNameCol" prefWidth="125.0" text="Part Name"/>
-            <TableColumn fx:id="partStockCol" prefWidth="125.0" text="Inventory"/>
-            <TableColumn fx:id="partPriceCol" prefWidth="125.0" text="Price per Unit"/>
+            <TableColumn fx:id="partIDCol" prefWidth="125.0" text="Part ID" />
+            <TableColumn fx:id="partNameCol" prefWidth="125.0" text="Part Name" />
+            <TableColumn fx:id="partStockCol" prefWidth="125.0" text="Inventory" />
+            <TableColumn fx:id="partPriceCol" prefWidth="125.0" text="Price per Unit" />
          </columns>
       </TableView>
       <HBox prefHeight="100.0" prefWidth="200.0">
-         <Button fx:id="addPart" mnemonicParsing="false" onAction="#onAddPart" text="ADD"/>
-         <Button fx:id="modPart" mnemonicParsing="false" onAction="#onModPart" text="MODIFY"/>
-         <Button fx:id="delPart" mnemonicParsing="false" onAction="#onDelPart" text="DELETE"/>
+         <Button fx:id="addPart" mnemonicParsing="false" onAction="#onAddPart" text="ADD" />
+         <Button fx:id="modPart" mnemonicParsing="false" onAction="#onModPart" text="MODIFY" />
+         <Button fx:id="delPart" mnemonicParsing="false" onAction="#onDelPart" text="DELETE" />
       </HBox>
    </VBox>
-   <VBox layoutX="10.0" layoutY="55.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1"
-         GridPane.rowIndex="1">
+   <VBox layoutX="10.0" layoutY="55.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
       <HBox prefHeight="100.0" prefWidth="200.0">
          <StackPane prefHeight="150.0" prefWidth="200.0">
             <Label prefWidth="200.0" text="Products" StackPane.alignment="CENTER_LEFT">
                <font>
-                  <Font name="System Bold" size="18.0"/>
+                  <Font name="System Bold" size="18.0" />
                </font>
             </Label>
          </StackPane>
          <StackPane alignment="CENTER_RIGHT" prefHeight="150.0" prefWidth="400.0">
-            <TextField fx:id="searchProds" maxWidth="-Infinity" prefWidth="200.0"
-                       promptText="Search by Product ID or Name" StackPane.alignment="CENTER">
+            <TextField fx:id="searchProds" maxWidth="-Infinity" prefWidth="200.0" promptText="Search by Product ID or Name" StackPane.alignment="CENTER">
                <font>
-                  <Font size="12.0"/>
+                  <Font size="12.0" />
                </font>
             </TextField>
          </StackPane>
       </HBox>
       <TableView fx:id="productsTable" prefHeight="400.0" prefWidth="600.0">
          <columns>
-            <TableColumn fx:id="prodIDCol" prefWidth="125.0" text="Product ID"/>
-            <TableColumn fx:id="prodNameCol" prefWidth="125.0" text="Product Name"/>
-            <TableColumn fx:id="prodStockCol" prefWidth="125.0" text="Inventory"/>
-            <TableColumn fx:id="prodPriceCol" prefWidth="125.0" text="Price per Unit"/>
+            <TableColumn fx:id="prodIDCol" prefWidth="125.0" text="Product ID" />
+            <TableColumn fx:id="prodNameCol" prefWidth="125.0" text="Product Name" />
+            <TableColumn fx:id="prodStockCol" prefWidth="125.0" text="Inventory" />
+            <TableColumn fx:id="prodPriceCol" prefWidth="125.0" text="Price per Unit" />
          </columns>
       </TableView>
       <HBox prefHeight="100.0" prefWidth="200.0">
-         <Button fx:id="addProd" mnemonicParsing="false" onAction="#onAddProd" text="ADD"/>
-         <Button fx:id="modProd" mnemonicParsing="false" onAction="#onModProd" text="MODIFY"/>
-         <Button fx:id="delProd" mnemonicParsing="false" onAction="#onDelProd" text="DELETE"/>
+         <Button fx:id="addProd" mnemonicParsing="false" onAction="#onAddProd" text="ADD" />
+         <Button fx:id="modProd" mnemonicParsing="false" onAction="#onModProd" text="MODIFY" />
+         <Button fx:id="delProd" mnemonicParsing="false" onAction="#onDelProd" text="DELETE" />
       </HBox>
    </VBox>
-   <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="2"/>
+   <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="2" />
    <HBox prefHeight="100.0" prefWidth="600.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
       <StackPane prefHeight="66.0" prefWidth="400.0">
-         <Label text="Associated parts must be removed to delete Product" textFill="#cf0000"
-                StackPane.alignment="CENTER_LEFT"/>
+         <Label text="Associated parts must be removed to delete Product" textFill="#cf0000" StackPane.alignment="CENTER_LEFT" />
       </StackPane>
       <StackPane prefHeight="66.0" prefWidth="200.0">
-         <Button fx:id="exit" mnemonicParsing="false" onAction="#onExit" text="Exit"
-                 StackPane.alignment="CENTER"/>
+         <Button fx:id="exit" mnemonicParsing="false" onAction="#onExit" text="Exit" StackPane.alignment="CENTER" />
       </StackPane>
    </HBox>
 </GridPane>
