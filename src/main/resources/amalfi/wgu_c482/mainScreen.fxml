@@ -88,8 +88,8 @@
    </VBox>
    <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="2" />
    <HBox prefHeight="100.0" prefWidth="600.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-      <StackPane prefHeight="66.0" prefWidth="400.0">
-         <Label text="Associated parts must be removed to delete Product" textFill="#cf0000" StackPane.alignment="CENTER_LEFT" />
+      <StackPane prefHeight="66.0" managed="false" prefWidth="400.0">
+         <Label text="Associated parts must be removed to delete Product" visible="false" textFill="#cf0000" StackPane.alignment="CENTER_LEFT" />
       </StackPane>
       <StackPane prefHeight="66.0" prefWidth="200.0">
          <Button fx:id="exit" mnemonicParsing="false" onAction="#onExit" text="Exit" StackPane.alignment="CENTER" />

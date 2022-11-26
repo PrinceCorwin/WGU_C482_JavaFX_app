@@ -100,7 +100,7 @@
             <padding>
                <Insets top="50.0" />
             </padding>
-            <StackPane fx:id="exceptStockIntPane" managed="false" prefWidth="200.0">
+            <StackPane fx:id="exceptStockIntPane" managed="false" prefHeight="150.0" prefWidth="200.0">
                <Label fx:id="exceptStockIntLabel" text="Exception: Stock must be an integer" textFill="RED" wrapText="true" visible="false" StackPane.alignment="CENTER_LEFT"/>
             </StackPane>
             <StackPane fx:id="exceptBetweenMinMaxPane" prefHeight="150.0" managed="false" prefWidth="200.0">

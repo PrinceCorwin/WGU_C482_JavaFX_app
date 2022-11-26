@@ -114,7 +114,7 @@
          <StackPane fx:id="exceptMinMaxPane" managed="false" prefHeight="150.0" prefWidth="200.0">
             <Label fx:id="exceptMinMaxLabel" text="Exception: Min Stock must be less than Max Stock" textFill="RED" visible="false" wrapText="true" StackPane.alignment="CENTER_LEFT" />
          </StackPane>
-         <StackPane fx:id="exceptPartNamePane" managed="false" prefWidth="200.0">
+         <StackPane fx:id="exceptPartNamePane" managed="false" prefHeight="150.0" prefWidth="200.0">
             <Label fx:id="exceptPartNameLabel" text="Exception: Part must have a Name" textFill="RED" visible="false" wrapText="true" StackPane.alignment="CENTER_LEFT" />
          </StackPane>
          <StackPane fx:id="exceptStockIntPane" managed="false" prefHeight="150.0" prefWidth="200.0">
@@ -129,7 +129,7 @@
          <StackPane fx:id="exceptMachineIntPane" managed="false" prefHeight="150.0" prefWidth="200.0">
             <Label fx:id="exceptMachineIntLabel" text="Exception: Machine ID must be an integer" textFill="RED" visible="false" wrapText="true" StackPane.alignment="CENTER_LEFT" />
          </StackPane>
-         <StackPane fx:id="exceptMinStockIntPane" managed="false" prefWidth="200.0">
+         <StackPane fx:id="exceptMinStockIntPane" managed="false" prefHeight="150.0" prefWidth="200.0">
             <Label fx:id="exceptMinStockIntLabel" text="Exception: Min Stock must be an integer" textFill="RED" visible="false" wrapText="true" StackPane.alignment="CENTER_LEFT" />
          </StackPane>
       </VBox>
