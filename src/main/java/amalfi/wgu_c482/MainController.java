@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -202,10 +203,11 @@ public class MainController implements Initializable {
             }
             populateProductTable(productsTable, newProducts);
         });
+        if (!Inventory.isTestDataAdded()) {
+            Inventory.addTestData();
+        }
 
-        Inventory.addTestData();
         populatePartsTable(partsTable, parts);
         populateProductTable(productsTable, products);
-
     }
 }
