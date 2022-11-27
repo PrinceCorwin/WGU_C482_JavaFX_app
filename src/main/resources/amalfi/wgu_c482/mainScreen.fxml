@@ -86,11 +86,18 @@
          <Button fx:id="delProd" mnemonicParsing="false" onAction="#onDelProd" text="DELETE" />
       </HBox>
    </VBox>
-   <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="2" />
-   <HBox prefHeight="100.0" prefWidth="600.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-      <StackPane prefHeight="66.0" managed="false" prefWidth="400.0">
-         <Label text="Associated parts must be removed to delete Product" visible="false" textFill="#cf0000" StackPane.alignment="CENTER_LEFT" />
-      </StackPane>
+   <StackPane fx:id="exceptNoPartsPane" prefWidth="400.0" GridPane.rowIndex="2">
+      <Label fx:id="exceptNoPartsLabel" text="No parts found. Change search input or ADD part." textFill="RED" visible="false" wrapText="true" StackPane.alignment="TOP_LEFT" />
+   </StackPane>
+   <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="600.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <VBox prefHeight="200.0" prefWidth="400.0">
+         <StackPane fx:id="exceptRemoveAssocPartsPane" managed="false" prefWidth="400.0">
+            <Label fx:id="exceptRemoveAssocPartsLabel" text="Product has associated parts. Click MODIFY to remove association" textFill="RED" visible="false" wrapText="true" StackPane.alignment="CENTER_LEFT" />
+         </StackPane>
+         <StackPane fx:id="exceptNoProdPane" prefWidth="400.0" managed="false">
+            <Label fx:id="exceptNoProdLabel" prefWidth="400.0" text="No products found. Change search input or ADD product" textFill="RED" visible="false" wrapText="true" StackPane.alignment="CENTER_LEFT" />
+         </StackPane>
+      </VBox>
       <StackPane prefHeight="66.0" prefWidth="200.0">
          <Button fx:id="exit" mnemonicParsing="false" onAction="#onExit" text="Exit" StackPane.alignment="CENTER" />
       </StackPane>

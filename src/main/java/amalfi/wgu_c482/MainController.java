@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -21,59 +22,11 @@ import java.util.ResourceBundle;
 
 /** This is my first javadoc comment */
 public class MainController implements Initializable {
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-//        Inventory.addPart(new InHouse(12,"LED Strip",6,3, 2, 40, 34));
-//        Inventory.addPart(new InHouse(33,"Switch",8,2, 2, 45, 2222));
-//        Inventory.addPart(new Outsourced(44,"40 watt bulb",3,30, 10, 60, "ABC"));
-//        Inventory.addPart(new Outsourced(13,"20 watt bulb",2,4, 3, 44, "XYZ"));
-//        Inventory.addProduct(new Product(23,"Chandelier",200,2, 1, 4));
-//        Inventory.addProduct(new Product(48,"Garage Light (LED)",30,10, 2, 60));
-//        Inventory.addProduct(new Product(5,"Ceiling Light (LED)",85,5, 2, 20));
-//        Inventory.addProduct(new Product(32,"Work Light",15,1, 1, 40));
-        Inventory.addTestData();
-        partsTable.setItems(parts);
-        productsTable.setItems(products);
 
-        partIDCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-        partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-        partStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
-        partPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
-        prodIDCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-        prodNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
-        prodStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
-        prodPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
-
-        searchParts.textProperty().addListener((obs, oldText, newText) -> {
-            ObservableList<Part> newParts = searchByPartName(newText, parts);
-            if (newParts.size() == 0) {
-                try {
-                    int id = Integer.parseInt((newText));
-                    newParts.add(searchByPartId(id, parts));
-                }
-                catch (NumberFormatException e) {
-                    //ignore exception
-                }
-            }
-            partsTable.setItems(newParts);
-        });
-
-        searchProds.textProperty().addListener((obs, oldText, newText) -> {
-            ObservableList<Product> newProducts = searchByProductName(newText, products);
-            if (newProducts.size() == 0) {
-                try {
-                    int id = Integer.parseInt((newText));
-                    newProducts.add(searchByProductId(id, products));
-                }
-                catch (NumberFormatException e) {
-                    //ignore exception
-                }
-            }
-            productsTable.setItems(newProducts);
-        });
-
-    }
-
+    public StackPane exceptNoPartsPane;
+    public Label exceptNoPartsLabel;
+    public StackPane exceptNoProdPane;
+    public Label exceptNoProdLabel;
     public TableView<Part> partsTable;
     public TableColumn<Part, Integer> partIDCol;
     public TableColumn<Part, String> partNameCol;
@@ -91,10 +44,10 @@ public class MainController implements Initializable {
     public Button modProd;
     public Button delProd;
     public Button exit;
-
+    public StackPane exceptRemoveAssocPartsPane;
+    public Label exceptRemoveAssocPartsLabel;
     private ObservableList<Part> parts = Inventory.getAllParts();
     private ObservableList<Product> products = Inventory.getAllProducts();
-
     @FXML
     private TextField searchParts;
     @FXML
@@ -119,17 +72,17 @@ public class MainController implements Initializable {
         }
         return namedProducts;
     }
-    private Part searchByPartId(int id, ObservableList<Part> list) {
+    private Part searchByPartId(int id, ObservableList<Part> list, ObservableList<Part> currentList) {
         for(Part part : list) {
-            if (part.getId() == id) {
+            if (part.getId() == id && !currentList.contains(part)) {
                 return part;
             }
         }
         return null;
     }
-    private Product searchByProductId(int id, ObservableList<Product> list) {
+    private Product searchByProductId(int id, ObservableList<Product> list, ObservableList<Product> currentList) {
        for(Product product : list) {
-            if (product.getId() == id) {
+            if (product.getId() == id && !currentList.contains(product)) {
                 return product;
             }
         }
@@ -161,13 +114,16 @@ public class MainController implements Initializable {
     }
 
     public void onDelProd() {
+        exceptRemoveAssocPartsLabel.setVisible(false);
+        exceptRemoveAssocPartsPane.setManaged(false);
         Product deletedProduct = productsTable.getSelectionModel().getSelectedItem();
         if (Inventory.deleteProduct(deletedProduct)) {
             products = Inventory.getAllProducts();
             productsTable.setItems(products);
         }
         else {
-//            turn on exception about not deleting products with associated parts
+            exceptRemoveAssocPartsLabel.setVisible(true);
+            exceptRemoveAssocPartsPane.setManaged(true);
         }
     }
 
@@ -191,9 +147,65 @@ public class MainController implements Initializable {
         stage.show();
     }
 
+    private void populatePartsTable(TableView<Part> table, ObservableList<Part> list) {
+        table.setItems(list);
+    }
+    private void populateProductTable(TableView<Product> table, ObservableList<Product> list) {
+        table.setItems(list);
 
+    }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        partIDCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        partStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        partPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        prodIDCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        prodNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        prodStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        prodPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
+        searchParts.textProperty().addListener((obs, oldText, newText) -> {
+            exceptNoPartsLabel.setVisible(false);
+            exceptNoPartsPane.setManaged(false);
+            ObservableList<Part> newParts = searchByPartName(newText, parts);
+                try {
+                    int id = Integer.parseInt((newText));
+                    newParts.add(searchByPartId(id, parts, newParts));
+                }
+                catch (NumberFormatException e) {
+                    //ignore exception
+                }
+            if (newParts.size() == 0) {
+                exceptNoPartsLabel.setVisible(true);
+                exceptNoPartsPane.setManaged(true);
+            }
+            populatePartsTable(partsTable, newParts);
+        });
 
+        searchProds.textProperty().addListener((obs, oldText, newText) -> {
+            exceptNoProdLabel.setVisible(false);
+            exceptNoProdPane.setManaged(false);
+            ObservableList<Product> newProducts = searchByProductName(newText, products);
+                try {
+                    int id = Integer.parseInt((newText));
+                    newProducts.add(searchByProductId(id, products, newProducts));
+                }
+                catch (NumberFormatException e) {
+                    //ignore exception
+                }
+            if (newProducts.size() == 0) {
+                exceptNoProdLabel.setVisible(true);
+                exceptNoProdPane.setManaged(true);
+            }
+            populateProductTable(productsTable, newProducts);
+        });
+
+        Inventory.addTestData();
+        populatePartsTable(partsTable, parts);
+        populateProductTable(productsTable, products);
+
+    }
 }
