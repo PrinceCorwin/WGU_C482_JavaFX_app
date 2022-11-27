@@ -23,15 +23,15 @@ import java.util.ResourceBundle;
 public class MainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        parts.add(new Part(12,"Joe",34,1));
-//        parts.add(new Part(33,"Steve",3,2));
-//        parts.add(new Part(44,"Rudy",34,3));
-//        parts.add(new Part(13,"Susan",3,4));
-        products.add(new Product(23,"Jennifer",2,2, 1, 4));
-        products.add(new Product(48,"Bob",3,10, 2, 60));
-        products.add(new Product(5,"Robert",4,5, 2, 20));
-        products.add(new Product(32,"Jose",1,1, 1, 40));
-
+//        Inventory.addPart(new InHouse(12,"LED Strip",6,3, 2, 40, 34));
+//        Inventory.addPart(new InHouse(33,"Switch",8,2, 2, 45, 2222));
+//        Inventory.addPart(new Outsourced(44,"40 watt bulb",3,30, 10, 60, "ABC"));
+//        Inventory.addPart(new Outsourced(13,"20 watt bulb",2,4, 3, 44, "XYZ"));
+//        Inventory.addProduct(new Product(23,"Chandelier",200,2, 1, 4));
+//        Inventory.addProduct(new Product(48,"Garage Light (LED)",30,10, 2, 60));
+//        Inventory.addProduct(new Product(5,"Ceiling Light (LED)",85,5, 2, 20));
+//        Inventory.addProduct(new Product(32,"Work Light",15,1, 1, 40));
+        Inventory.addTestData();
         partsTable.setItems(parts);
         productsTable.setItems(products);
 
@@ -92,8 +92,8 @@ public class MainController implements Initializable {
     public Button delProd;
     public Button exit;
 
-    private ObservableList<Part> parts = FXCollections.observableArrayList();
-    private ObservableList<Product> products = FXCollections.observableArrayList();
+    private ObservableList<Part> parts = Inventory.getAllParts();
+    private ObservableList<Product> products = Inventory.getAllProducts();
 
     @FXML
     private TextField searchParts;
@@ -152,8 +152,23 @@ public class MainController implements Initializable {
         stage.show();
     }
 
-    public void onDelPart(ActionEvent actionEvent) throws IOException {
+    public void onDelPart() {
+        Part deletedPart = partsTable.getSelectionModel().getSelectedItem();
+        if (Inventory.deletePart(deletedPart)) {
+            parts = Inventory.getAllParts();
+            partsTable.setItems(parts);
+        }
+    }
 
+    public void onDelProd() {
+        Product deletedProduct = productsTable.getSelectionModel().getSelectedItem();
+        if (Inventory.deleteProduct(deletedProduct)) {
+            products = Inventory.getAllProducts();
+            productsTable.setItems(products);
+        }
+        else {
+//            turn on exception about not deleting products with associated parts
+        }
     }
 
     public void onExit() {
@@ -176,8 +191,7 @@ public class MainController implements Initializable {
         stage.show();
     }
 
-    public void onDelProd(ActionEvent actionEvent) throws IOException {
-    }
+
 
 
 

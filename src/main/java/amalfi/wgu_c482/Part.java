@@ -4,7 +4,7 @@ package amalfi.wgu_c482; /**
 
 /**
  *
- * @author Steve Amalfitano
+ * @author Steve Corwin Amalfitano
  */
 public abstract class Part {
     private int id;
