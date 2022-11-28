@@ -59,7 +59,7 @@
             <Label text="Max Stock" StackPane.alignment="CENTER_LEFT" />
          </StackPane>
          <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="5">
-            <Label fx:id="machineIdLabel" text="Machine ID" StackPane.alignment="CENTER_LEFT" />
+            <Label fx:id="specTagLabel" text="Machine ID" StackPane.alignment="CENTER_LEFT" />
          </StackPane>
          <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1">
             <TextField disable="true" promptText="Auto Gen - Disabled">
@@ -81,19 +81,13 @@
             <TextField fx:id="partMaxField" />
          </StackPane>
          <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
-            <TextField fx:id="machineField" />
+            <TextField fx:id="specTagField" />
          </StackPane>
          <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
             <Label text="Min Stock" />
          </StackPane>
          <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
             <TextField fx:id="partMinField" StackPane.alignment="CENTER_LEFT" />
-         </StackPane>
-         <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="6">
-            <Label fx:id="companyNameLabel" text="Company Name" StackPane.alignment="CENTER_LEFT" />
-         </StackPane>
-         <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
-            <TextField fx:id="companyField" />
          </StackPane>
       </GridPane>
       <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="560.0">

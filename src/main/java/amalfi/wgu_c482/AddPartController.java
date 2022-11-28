@@ -19,15 +19,11 @@ import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class AddPartController implements Initializable {
-    public Label machineIdLabel;
     public TextField partNameField;
     public TextField partStockField;
     public TextField partPriceField;
     public TextField partMaxField;
-    public TextField machineField;
     public TextField partMinField;
-    public Label companyNameLabel;
-    public TextField companyField;
     public Button partSave;
     public Button partCancel;
     public StackPane exceptCompNamePane;
@@ -50,6 +46,8 @@ public class AddPartController implements Initializable {
     public Label exceptMinStockIntLabel;
     public RadioButton inHouseRadio;
     public RadioButton outSourcedRadio;
+    public TextField specTagField;
+    public Label specTagLabel;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -72,9 +70,11 @@ public class AddPartController implements Initializable {
         stage.show();
     }
 
-    public void onInHouseRadio(ActionEvent actionEvent) throws IOException {
+    public void onInHouseRadio() {
+        specTagLabel.setText("Machine ID");
     }
 
-    public void onOutsourcedRadio(ActionEvent actionEvent) throws IOException {
+    public void onOutsourcedRadio() {
+        specTagLabel.setText("Company Name");
     }
 }
