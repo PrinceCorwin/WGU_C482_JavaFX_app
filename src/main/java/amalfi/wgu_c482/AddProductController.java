@@ -72,11 +72,71 @@ public class AddProductController implements Initializable {
         stage.show();
     }
 
+    private boolean checkForInt(String str) {
+        try {
+            int num = Integer.parseInt(str);
+        }
+        catch(NumberFormatException e) {
+            return false;
+        }
+        return true;
+    }
+
 
     public void onProdSave(ActionEvent actionEvent) throws IOException {
+        boolean noErrors = true;
+        int stock;
+        int max;
+        int min;
+        double price;
+        if (prodNameField.getText().isBlank()) {
+            exceptProdNameLabel.setVisible(true);
+            exceptProdNamePane.setManaged(true);
+            noErrors = false;
+        }
+
+        if (!checkForInt(prodStockField.getText())) {
+            exceptStockIntLabel.setVisible(true);
+            exceptStockIntPane.setManaged(true);
+            noErrors = false;
+        }
+        else {
+            stock = Integer.parseInt(prodStockField.getText());
+        }
+
+        if (!checkForInt(prodMinField.getText())) {
+            exceptMinStockIntLabel.setVisible(true);
+            exceptMinStockIntPane.setManaged(true);
+            noErrors = false;
+        }
+        else {
+            min = Integer.parseInt(prodMinField.getText());
+        }
+
+        if (!checkForInt(prodMaxField.getText())) {
+            exceptMaxStockIntLabel.setVisible(true);
+            exceptMaxStockIntPane.setManaged(true);
+            noErrors = false;
+
+        }
+        else {
+            max = Integer.parseInt((prodMaxField.getText()));
+        }
+
+        if (!checkForInt(prodPriceField.getText())) {
+            exceptPriceDoubleLabel.setVisible(true);
+            exceptPriceDoublePane.setManaged(true);
+            noErrors = false;
+        }
+
+
         backToMain(actionEvent);
 
     }
+
+    private void saveProd() {
+    }
+
 
     public void onProdCancel(ActionEvent actionEvent) throws IOException {
         backToMain(actionEvent);
