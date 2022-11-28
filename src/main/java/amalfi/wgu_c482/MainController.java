@@ -17,7 +17,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -47,6 +46,10 @@ public class MainController implements Initializable {
     public Button exit;
     public StackPane exceptRemoveAssocPartsPane;
     public Label exceptRemoveAssocPartsLabel;
+    public StackPane exceptSelectProdPane;
+    public Label exceptSelectProdLabel;
+    public StackPane exceptSelectPartsPane;
+    public Label exceptSelectPartsLabel;
     private ObservableList<Part> parts = Inventory.getAllParts();
     private ObservableList<Product> products = Inventory.getAllProducts();
     @FXML
@@ -107,24 +110,40 @@ public class MainController implements Initializable {
     }
 
     public void onDelPart() {
-        Part deletedPart = partsTable.getSelectionModel().getSelectedItem();
-        if (Inventory.deletePart(deletedPart)) {
-            parts = Inventory.getAllParts();
-            partsTable.setItems(parts);
+        exceptSelectPartsLabel.setVisible(false);
+        exceptSelectPartsPane.setManaged(false);
+        try {
+            Part deletedPart = partsTable.getSelectionModel().getSelectedItem();
+            if (Inventory.deletePart(deletedPart)) {
+                parts = Inventory.getAllParts();
+                partsTable.setItems(parts);
+            }
+        }
+        catch (NullPointerException e) {
+            exceptSelectPartsLabel.setVisible(true);
+            exceptSelectPartsPane.setManaged(true);
         }
     }
 
     public void onDelProd() {
+        exceptSelectProdLabel.setVisible(false);
+        exceptSelectProdPane.setManaged(false);
         exceptRemoveAssocPartsLabel.setVisible(false);
         exceptRemoveAssocPartsPane.setManaged(false);
-        Product deletedProduct = productsTable.getSelectionModel().getSelectedItem();
-        if (Inventory.deleteProduct(deletedProduct)) {
-            products = Inventory.getAllProducts();
-            productsTable.setItems(products);
+        try {
+            Product deletedProduct = productsTable.getSelectionModel().getSelectedItem();
+            if (Inventory.deleteProduct(deletedProduct)) {
+                products = Inventory.getAllProducts();
+                productsTable.setItems(products);
+            }
+            else {
+                exceptRemoveAssocPartsLabel.setVisible(true);
+                exceptRemoveAssocPartsPane.setManaged(true);
+            }
         }
-        else {
-            exceptRemoveAssocPartsLabel.setVisible(true);
-            exceptRemoveAssocPartsPane.setManaged(true);
+        catch (NullPointerException e) {
+            exceptSelectProdLabel.setVisible(true);
+            exceptSelectProdPane.setManaged(true);
         }
     }
 
