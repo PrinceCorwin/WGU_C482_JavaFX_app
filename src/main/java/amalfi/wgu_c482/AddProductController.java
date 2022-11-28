@@ -74,7 +74,7 @@ public class AddProductController implements Initializable {
 
     private boolean checkForInt(String str) {
         try {
-            int num = Integer.parseInt(str);
+           Integer.parseInt(str);
         }
         catch(NumberFormatException e) {
             return false;
@@ -85,51 +85,59 @@ public class AddProductController implements Initializable {
 
     public void onProdSave(ActionEvent actionEvent) throws IOException {
         boolean noErrors = true;
-        int stock;
-        int max;
-        int min;
+        int stock = 0;
+        int max = 0;
+        int min = 0;
         double price;
+
+        if (checkForInt(prodStockField.getText())) {
+            stock = Integer.parseInt(prodStockField.getText());
+        }
+        else {
+            exceptStockIntLabel.setVisible(true);
+            exceptStockIntPane.setManaged(true);
+            noErrors = false;
+        }
+
+        if (checkForInt(prodMinField.getText())) {
+            min = Integer.parseInt(prodMinField.getText());
+        }
+        else {
+            exceptMinStockIntLabel.setVisible(true);
+            exceptMinStockIntPane.setManaged(true);
+            noErrors = false;
+        }
+
+        if (checkForInt(prodMaxField.getText())) {
+            max = Integer.parseInt((prodMaxField.getText()));
+        }
+        else {
+            exceptMaxStockIntLabel.setVisible(true);
+            exceptMaxStockIntPane.setManaged(true);
+            noErrors = false;
+        }
+
+        if (noErrors) {
+            if (stock > max || stock < min) {
+                exceptBetweenMinMaxLabel.setVisible(true);
+                exceptBetweenMinMaxPane.setManaged(true);
+                noErrors = false;
+            }
+        }
+        try {
+            price = Double.parseDouble(prodPriceField.getText());
+        }
+        catch(NumberFormatException e) {
+            exceptPriceDoublePane.setManaged(true);
+            exceptPriceDoubleLabel.setVisible(true);
+            noErrors = false;
+        }
+
         if (prodNameField.getText().isBlank()) {
             exceptProdNameLabel.setVisible(true);
             exceptProdNamePane.setManaged(true);
             noErrors = false;
         }
-
-        if (!checkForInt(prodStockField.getText())) {
-            exceptStockIntLabel.setVisible(true);
-            exceptStockIntPane.setManaged(true);
-            noErrors = false;
-        }
-        else {
-            stock = Integer.parseInt(prodStockField.getText());
-        }
-
-        if (!checkForInt(prodMinField.getText())) {
-            exceptMinStockIntLabel.setVisible(true);
-            exceptMinStockIntPane.setManaged(true);
-            noErrors = false;
-        }
-        else {
-            min = Integer.parseInt(prodMinField.getText());
-        }
-
-        if (!checkForInt(prodMaxField.getText())) {
-            exceptMaxStockIntLabel.setVisible(true);
-            exceptMaxStockIntPane.setManaged(true);
-            noErrors = false;
-
-        }
-        else {
-            max = Integer.parseInt((prodMaxField.getText()));
-        }
-
-        if (!checkForInt(prodPriceField.getText())) {
-            exceptPriceDoubleLabel.setVisible(true);
-            exceptPriceDoublePane.setManaged(true);
-            noErrors = false;
-        }
-
-
         backToMain(actionEvent);
 
     }
