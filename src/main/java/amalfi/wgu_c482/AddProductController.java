@@ -43,7 +43,6 @@ public class AddProductController implements Initializable {
     public TextField prodPriceField;
     public TextField prodMaxField;
     public TextField prodMinField;
-//    public TextField searchParts;
     public TableView<Part> partsTableSearch;
     public TableView<Part> partsTableAssoc;
     public TableColumn<Part, Integer> partIdSearchCol;
@@ -58,32 +57,48 @@ public class AddProductController implements Initializable {
     public Button removeAssocPart;
     public StackPane exceptNoPartsPane;
     public Label exceptNoPartsLabel;
-    private ObservableList<Part> parts = Inventory.getAllParts();
+    private final ObservableList<Part> parts = Inventory.getAllParts();
+    private final ObservableList<Part> associatedParts = FXCollections.observableArrayList();
+    private static Product modifiedProd = null;
+    public Label titleLabel;
 
+    public static void setModifiedProd(Product prod) {
+        modifiedProd = prod;
+    }
 
     @FXML
     private TextField searchParts;
-    private ObservableList<Part> searchByPartName(String partialName, ObservableList<Part> list) {
-        ObservableList<Part> namedParts = FXCollections.observableArrayList();
-        for(Part part : list) {
-            if (part.getName().contains(partialName)) {
-                namedParts.add(part);
+
+    public void associatePart() {
+        exceptNoPartsLabel.setVisible(false);
+        try {
+            Part addedPart = partsTableSearch.getSelectionModel().getSelectedItem();
+            if (!associatedParts.contains(addedPart) && addedPart != null) {
+                associatedParts.add(addedPart);
+                partsTableAssoc.setItems(associatedParts);
+            }
+            else {
+                exceptNoPartsLabel.setText("No part selected or part already associated");
+                exceptNoPartsLabel.setVisible(true);
             }
         }
-        return namedParts;
-    }
-    private Part searchByPartId(int id, ObservableList<Part> list, ObservableList<Part> currentList) {
-        for(Part part : list) {
-            if (part.getId() == id && !currentList.contains(part)) {
-                return part;
-            }
+        catch (NullPointerException e) {
+            exceptNoPartsLabel.setText("Part must be selected before adding");
+            exceptNoPartsLabel.setVisible(true);
         }
-        return null;
-    }
-    public void onAddToProd(ActionEvent actionEvent) throws IOException {
     }
 
-    public void onRemoveAssocPart(ActionEvent actionEvent) throws IOException {
+    public void onRemoveAssocPart(){
+        exceptNoPartsLabel.setVisible(false);
+        try {
+            Part deletedPart = partsTableAssoc.getSelectionModel().getSelectedItem();
+            associatedParts.remove(deletedPart);
+            partsTableAssoc.setItems(associatedParts);
+        }
+        catch (NullPointerException e) {
+            exceptNoPartsLabel.setText("Part must be selected before removing");
+            exceptNoPartsLabel.setVisible(true);
+        }
     }
 
     private void backToMain(ActionEvent e) throws IOException {
@@ -188,15 +203,29 @@ public class AddProductController implements Initializable {
             name = prodNameField.getText();
         }
         if (noErrors) {
-            Inventory.addProduct(new Product(UniqueID.getUniqueProdID(), name, price, stock, min, max));
-
+            Product newProd;
+            if (modifiedProd != null) {
+                newProd = new Product(modifiedProd.getId(), name, price, stock, min, max);
+                for (Part item : associatedParts) {
+                    newProd.addAssociatePart(item);
+                }
+                int index = Inventory.getAllProducts().indexOf(modifiedProd);
+                Inventory.updateProduct(index, newProd);
+            }
+            else {
+                newProd = new Product(UniqueID.getUniqueProdID(), name, price, stock, min, max);
+                Inventory.addProduct(newProd);
+                for (Part item : associatedParts) {
+                    newProd.addAssociatePart(item);
+                }
+            }
+            modifiedProd = null;
             backToMain(actionEvent);
-
         }
-
     }
 
     public void onProdCancel(ActionEvent actionEvent) throws IOException {
+        modifiedProd = null;
         backToMain(actionEvent);
 
     }
@@ -211,13 +240,29 @@ public class AddProductController implements Initializable {
         partStockAssocCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         partPriceAssocCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
+        if(modifiedProd != null) {
+            titleLabel.setText("Modify Product");
+            prodNameField.setText(modifiedProd.getName());
+            prodStockField.setText(String.valueOf(modifiedProd.getStock()));
+            prodMinField.setText(String.valueOf(modifiedProd.getMin()));
+            prodMaxField.setText(String.valueOf(modifiedProd.getMax()));
+            prodPriceField.setText(String.valueOf(modifiedProd.getPrice()));
+
+            ObservableList<Part> modAssocParts = modifiedProd.getAllAssociatedParts();
+            associatedParts.addAll(modAssocParts);
+        }
+
         searchParts.textProperty().addListener((obs, oldText, newText) -> {
+            exceptNoPartsLabel.setText("No parts found. Change search input");
             exceptNoPartsLabel.setVisible(false);
 //            exceptNoPartsPane.setManaged(false);
-            ObservableList<Part> newParts = searchByPartName(newText, parts);
+            ObservableList<Part> newParts = Inventory.lookupPart(newText);
             try {
                 int id = Integer.parseInt((newText));
-                newParts.add(searchByPartId(id, parts, newParts));
+                Part part = Inventory.lookupPart(id);
+                if (!newParts.contains(part) && part != null) {
+                    newParts.add(part);
+                }
             }
             catch (NumberFormatException e) {
                 //ignore exception
@@ -228,7 +273,8 @@ public class AddProductController implements Initializable {
             }
             partsTableSearch.setItems(newParts);
         });
-        partsTableSearch.setItems(Inventory.getAllParts());
+        partsTableSearch.setItems(parts);
+        partsTableAssoc.setItems(associatedParts);
     }
 
 }

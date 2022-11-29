@@ -8,7 +8,7 @@ import javafx.collections.ObservableList;
  * @author Steve Amalfitano
  */
 public class Product {
-    private ObservableList<Part> associatedParts;
+    private final ObservableList<Part> associatedParts;
     private int id;
     private String name;
     private double price;
@@ -127,7 +127,7 @@ public class Product {
     /**
      * @return the associatedParts list for the product
      */
-    public ObservableList<Part> getAllAssociatedPart() {
+    public ObservableList<Part> getAllAssociatedParts() {
         return associatedParts;
     }
 

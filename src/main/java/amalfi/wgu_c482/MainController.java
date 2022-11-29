@@ -1,7 +1,6 @@
 package amalfi.wgu_c482;
 
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -57,42 +56,6 @@ public class MainController implements Initializable {
     @FXML
     private TextField searchProds;
 
-    private ObservableList<Part> searchByPartName(String partialName, ObservableList<Part> list) {
-        ObservableList<Part> namedParts = FXCollections.observableArrayList();
-        for(Part part : list) {
-            if (part.getName().contains(partialName)) {
-                namedParts.add(part);
-            }
-        }
-        return namedParts;
-    }
-    private ObservableList<Product> searchByProductName(String partialName, ObservableList<Product> list) {
-        ObservableList<Product> namedProducts = FXCollections.observableArrayList();
-        for(Product product : list) {
-            if (product.getName().contains(partialName)) {
-                namedProducts.add(product);
-            }
-
-        }
-        return namedProducts;
-    }
-    private Part searchByPartId(int id, ObservableList<Part> list, ObservableList<Part> currentList) {
-        for(Part part : list) {
-            if (part.getId() == id && !currentList.contains(part)) {
-                return part;
-            }
-        }
-        return null;
-    }
-    private Product searchByProductId(int id, ObservableList<Product> list, ObservableList<Product> currentList) {
-       for(Product product : list) {
-            if (product.getId() == id && !currentList.contains(product)) {
-                return product;
-            }
-        }
-        return null;
-    }
-
     public void onAddPart(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/amalfi/wgu_c482/addPart.fxml")));
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
@@ -124,7 +87,23 @@ public class MainController implements Initializable {
             exceptSelectPartsPane.setManaged(true);
         }
     }
+    public void onAddProd(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/amalfi/wgu_c482/addProduct.fxml")));
+        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 800, 500);
+        stage.setScene(scene);
+        stage.show();
+    }
 
+    public void onModProd(ActionEvent actionEvent) throws IOException {
+        Product prod = productsTable.getSelectionModel().getSelectedItem();
+        AddProductController.setModifiedProd(prod);
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/amalfi/wgu_c482/addProduct.fxml")));
+        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root, 800, 500);
+        stage.setScene(scene);
+        stage.show();
+    }
     public void onDelProd() {
         exceptSelectProdLabel.setVisible(false);
         exceptSelectProdPane.setManaged(false);
@@ -146,33 +125,8 @@ public class MainController implements Initializable {
             exceptSelectProdPane.setManaged(true);
         }
     }
-
     public void onExit() {
         Platform.exit();
-    }
-
-    public void onAddProd(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/amalfi/wgu_c482/addProduct.fxml")));
-        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 800, 500);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void onModProd(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/amalfi/wgu_c482/modProduct.fxml")));
-        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 800, 500);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    private void populatePartsTable(TableView<Part> table, ObservableList<Part> list) {
-        table.setItems(list);
-    }
-    private void populateProductTable(TableView<Product> table, ObservableList<Product> list) {
-        table.setItems(list);
-
     }
 
     @Override
@@ -190,10 +144,13 @@ public class MainController implements Initializable {
         searchParts.textProperty().addListener((obs, oldText, newText) -> {
             exceptNoPartsLabel.setVisible(false);
             exceptNoPartsPane.setManaged(false);
-            ObservableList<Part> newParts = searchByPartName(newText, parts);
+            ObservableList<Part> newParts = Inventory.lookupPart(newText);
                 try {
                     int id = Integer.parseInt((newText));
-                    newParts.add(searchByPartId(id, parts, newParts));
+                    Part part = Inventory.lookupPart(id);
+                    if (!newParts.contains(part) && part != null) {
+                        newParts.add(part);
+                    }
                 }
                 catch (NumberFormatException e) {
                     //ignore exception
@@ -202,16 +159,19 @@ public class MainController implements Initializable {
                 exceptNoPartsLabel.setVisible(true);
                 exceptNoPartsPane.setManaged(true);
             }
-            populatePartsTable(partsTable, newParts);
+            partsTable.setItems(newParts);
         });
 
         searchProds.textProperty().addListener((obs, oldText, newText) -> {
             exceptNoProdLabel.setVisible(false);
             exceptNoProdPane.setManaged(false);
-            ObservableList<Product> newProducts = searchByProductName(newText, products);
+            ObservableList<Product> newProducts = Inventory.lookupProduct(newText);
                 try {
                     int id = Integer.parseInt((newText));
-                    newProducts.add(searchByProductId(id, products, newProducts));
+                    Product prod = Inventory.lookupProduct(id);
+                    if (!newProducts.contains(prod) && prod != null) {
+                        newProducts.add(prod);
+                    }
                 }
                 catch (NumberFormatException e) {
                     //ignore exception
@@ -220,13 +180,12 @@ public class MainController implements Initializable {
                 exceptNoProdLabel.setVisible(true);
                 exceptNoProdPane.setManaged(true);
             }
-            populateProductTable(productsTable, newProducts);
+            productsTable.setItems(newProducts);
         });
         if (!Inventory.isTestDataAdded()) {
             Inventory.addTestData();
         }
-
-        populatePartsTable(partsTable, parts);
-        populateProductTable(productsTable, products);
+        partsTable.setItems(parts);
+        productsTable.setItems(products);
     }
 }

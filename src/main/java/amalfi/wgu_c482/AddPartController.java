@@ -48,11 +48,16 @@ public class AddPartController implements Initializable {
     public RadioButton outSourcedRadio;
     public TextField specTagField;
     public Label specTagLabel;
+    private static InHouse inHousePart = null;
+    private static Outsourced outsourcedPart = null;
+    public Label titleLabel;
+    public String partClass = "";
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
+    public static void setInHousePart(InHouse part) {
+        inHousePart = part;
     }
+    public static void setOutsourcedPart(Outsourced part) { outsourcedPart = part; }
+
 
     public void onPartSave(ActionEvent actionEvent) throws IOException {
         backToMain(actionEvent);
@@ -69,12 +74,45 @@ public class AddPartController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
+    private boolean checkForInt(String str) {
+        try {
+            Integer.parseInt(str);
+        }
+        catch(NumberFormatException e) {
+            return false;
+        }
+        return true;
+    }
+    private void hideErrors() {
+        exceptStockIntLabel.setVisible(false);
+        exceptStockIntPane.setManaged(false);
+        exceptMinStockIntLabel.setVisible(false);
+        exceptMinStockIntPane.setManaged(false);
+        exceptMaxStockIntLabel.setVisible(false);
+        exceptMaxStockIntPane.setManaged(false);
+        exceptBetweenMinMaxLabel.setVisible(false);
+        exceptBetweenMinMaxPane.setManaged(false);
+        exceptPriceDoublePane.setManaged(false);
+        exceptPriceDoubleLabel.setVisible(false);
+        exceptMinMaxPane.setManaged(false);
+        exceptMinMaxLabel.setVisible(false);
+        exceptCompNameLabel.setVisible(false);
+        exceptCompNamePane.setManaged(false);
+        exceptMachineIntLabel.setVisible(false);
+        exceptMachineIntPane.setManaged(false);
+        exceptPartNameLabel.setVisible(false);
+        exceptPartNamePane.setManaged(false);
+    }
     public void onInHouseRadio() {
         specTagLabel.setText("Machine ID");
     }
 
     public void onOutsourcedRadio() {
         specTagLabel.setText("Company Name");
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+
     }
 }
