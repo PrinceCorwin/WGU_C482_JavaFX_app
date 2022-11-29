@@ -1,12 +1,16 @@
 package amalfi.wgu_c482;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -34,17 +38,12 @@ public class AddProductController implements Initializable {
     public Label exceptMinStockIntLabel;
     public Button prodSave;
     public Button prodCancel;
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-    }
     public TextField prodNameField;
     public TextField prodStockField;
     public TextField prodPriceField;
     public TextField prodMaxField;
     public TextField prodMinField;
-    public TextField searchParts;
+//    public TextField searchParts;
     public TableView<Part> partsTableSearch;
     public TableView<Part> partsTableAssoc;
     public TableColumn<Part, Integer> partIdSearchCol;
@@ -57,7 +56,30 @@ public class AddProductController implements Initializable {
     public TableColumn<Part, Integer> partStockAssocCol;
     public TableColumn<Part, Double> partPriceAssocCol;
     public Button removeAssocPart;
+    public StackPane exceptNoPartsPane;
+    public Label exceptNoPartsLabel;
+    private ObservableList<Part> parts = Inventory.getAllParts();
 
+
+    @FXML
+    private TextField searchParts;
+    private ObservableList<Part> searchByPartName(String partialName, ObservableList<Part> list) {
+        ObservableList<Part> namedParts = FXCollections.observableArrayList();
+        for(Part part : list) {
+            if (part.getName().contains(partialName)) {
+                namedParts.add(part);
+            }
+        }
+        return namedParts;
+    }
+    private Part searchByPartId(int id, ObservableList<Part> list, ObservableList<Part> currentList) {
+        for(Part part : list) {
+            if (part.getId() == id && !currentList.contains(part)) {
+                return part;
+            }
+        }
+        return null;
+    }
     public void onAddToProd(ActionEvent actionEvent) throws IOException {
     }
 
@@ -82,13 +104,32 @@ public class AddProductController implements Initializable {
         return true;
     }
 
+    private void hideErrors() {
+        exceptStockIntLabel.setVisible(false);
+        exceptStockIntPane.setManaged(false);
+        exceptMinStockIntLabel.setVisible(false);
+        exceptMinStockIntPane.setManaged(false);
+        exceptMaxStockIntLabel.setVisible(false);
+        exceptMaxStockIntPane.setManaged(false);
+        exceptBetweenMinMaxLabel.setVisible(false);
+        exceptBetweenMinMaxPane.setManaged(false);
+        exceptPriceDoublePane.setManaged(false);
+        exceptPriceDoubleLabel.setVisible(false);
+        exceptProdNameLabel.setVisible(false);
+        exceptProdNamePane.setManaged(false);
+        exceptMinMaxPane.setManaged(false);
+        exceptMinMaxLabel.setVisible(false);
+    }
+
 
     public void onProdSave(ActionEvent actionEvent) throws IOException {
+        hideErrors();
+        String name = "";
         boolean noErrors = true;
         int stock = 0;
         int max = 0;
         int min = 0;
-        double price;
+        double price = 0.00;
 
         if (checkForInt(prodStockField.getText())) {
             stock = Integer.parseInt(prodStockField.getText());
@@ -123,6 +164,11 @@ public class AddProductController implements Initializable {
                 exceptBetweenMinMaxPane.setManaged(true);
                 noErrors = false;
             }
+            if (min >= max) {
+                exceptMinMaxPane.setManaged(true);
+                exceptMinMaxLabel.setVisible(true);
+                noErrors = false;
+            }
         }
         try {
             price = Double.parseDouble(prodPriceField.getText());
@@ -138,16 +184,51 @@ public class AddProductController implements Initializable {
             exceptProdNamePane.setManaged(true);
             noErrors = false;
         }
-        backToMain(actionEvent);
+        else {
+            name = prodNameField.getText();
+        }
+        if (noErrors) {
+            Inventory.addProduct(new Product(UniqueID.getUniqueProdID(), name, price, stock, min, max));
+
+            backToMain(actionEvent);
+
+        }
 
     }
-
-    private void saveProd() {
-    }
-
 
     public void onProdCancel(ActionEvent actionEvent) throws IOException {
         backToMain(actionEvent);
 
     }
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        partIdSearchCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        partNameSearchCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        partStockSearchCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        partPriceSearchCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        partIdAssocCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        partNameAssocCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        partStockAssocCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        partPriceAssocCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+        searchParts.textProperty().addListener((obs, oldText, newText) -> {
+            exceptNoPartsLabel.setVisible(false);
+//            exceptNoPartsPane.setManaged(false);
+            ObservableList<Part> newParts = searchByPartName(newText, parts);
+            try {
+                int id = Integer.parseInt((newText));
+                newParts.add(searchByPartId(id, parts, newParts));
+            }
+            catch (NumberFormatException e) {
+                //ignore exception
+            }
+            if (newParts.size() == 0) {
+                exceptNoPartsLabel.setVisible(true);
+//                exceptNoPartsPane.setManaged(true);
+            }
+            partsTableSearch.setItems(newParts);
+        });
+        partsTableSearch.setItems(Inventory.getAllParts());
+    }
+
 }

@@ -100,26 +100,26 @@
             <padding>
                <Insets top="50.0" />
             </padding>
-            <StackPane fx:id="exceptStockIntPane" managed="false" prefHeight="150.0" prefWidth="200.0">
-               <Label fx:id="exceptStockIntLabel" text="Exception: Stock must be an integer" textFill="RED" wrapText="true" visible="false" StackPane.alignment="CENTER_LEFT"/>
+            <StackPane fx:id="exceptStockIntPane" alignment="TOP_LEFT" managed="false" prefWidth="200.0">
+               <Label fx:id="exceptStockIntLabel" text="Exception: Stock must be an integer" textFill="RED" visible="false" wrapText="true" StackPane.alignment="TOP_LEFT" />
             </StackPane>
-            <StackPane fx:id="exceptBetweenMinMaxPane" prefHeight="150.0" managed="false" prefWidth="200.0">
-               <Label fx:id="exceptBetweenMinMaxLabel" text="Exception: Stock must be between Min Stock and Max Stock" textFill="RED" wrapText="true" visible="false" StackPane.alignment="CENTER_LEFT" />
+            <StackPane fx:id="exceptBetweenMinMaxPane" alignment="TOP_LEFT" managed="false" prefWidth="200.0">
+               <Label fx:id="exceptBetweenMinMaxLabel" text="Exception: Stock must be between Min Stock and Max Stock" textFill="RED" visible="false" wrapText="true" StackPane.alignment="TOP_LEFT" />
             </StackPane>
-            <StackPane fx:id="exceptMinMaxPane" prefHeight="150.0" managed="false" prefWidth="200.0">
-               <Label fx:id="exceptMinMaxLabel" text="Exception: Min Stock must be less than Max Stock" textFill="RED" wrapText="true" visible="false" StackPane.alignment="CENTER_LEFT" />
+            <StackPane fx:id="exceptMinMaxPane" alignment="TOP_LEFT" managed="false" prefWidth="200.0">
+               <Label fx:id="exceptMinMaxLabel" text="Exception: Min Stock must be less than Max Stock" textFill="RED" visible="false" wrapText="true" StackPane.alignment="TOP_LEFT" />
             </StackPane>
-            <StackPane fx:id="exceptProdNamePane" prefHeight="150.0" managed="false" prefWidth="200.0">
-               <Label fx:id="exceptProdNameLabel" text="Exception: Product must have a Name" textFill="RED" wrapText="true" visible="false" StackPane.alignment="CENTER_LEFT" />
+            <StackPane fx:id="exceptProdNamePane" alignment="TOP_LEFT" managed="false" prefWidth="200.0">
+               <Label fx:id="exceptProdNameLabel" text="Exception: Product must have a Name" textFill="RED" visible="false" wrapText="true" StackPane.alignment="TOP_LEFT" />
             </StackPane>
-            <StackPane fx:id="exceptPriceDoublePane" prefHeight="150.0" managed="false" prefWidth="200.0">
-               <Label fx:id="exceptPriceDoubleLabel" text="Exception: Price must be a double (e.g., 8.99)" textFill="RED" wrapText="true" visible="false" StackPane.alignment="CENTER_LEFT" />
+            <StackPane fx:id="exceptPriceDoublePane" alignment="TOP_LEFT" managed="false" prefWidth="200.0">
+               <Label fx:id="exceptPriceDoubleLabel" text="Exception: Price must be a double (e.g., 8.99)" textFill="RED" visible="false" wrapText="true" StackPane.alignment="TOP_LEFT" />
             </StackPane>
-            <StackPane fx:id="exceptMaxStockIntPane" prefHeight="150.0" managed="false" prefWidth="200.0">
-               <Label fx:id="exceptMaxStockIntLabel" text="Exception: Max Stock must be an integer" textFill="RED" wrapText="true" visible="false" StackPane.alignment="CENTER_LEFT" />
+            <StackPane fx:id="exceptMaxStockIntPane" alignment="TOP_LEFT" managed="false" prefWidth="200.0">
+               <Label fx:id="exceptMaxStockIntLabel" text="Exception: Max Stock must be an integer" textFill="RED" visible="false" wrapText="true" StackPane.alignment="TOP_LEFT" />
             </StackPane>
-            <StackPane fx:id="exceptMinStockIntPane" prefHeight="150.0" managed="false" prefWidth="200.0">
-               <Label fx:id="exceptMinStockIntLabel" text="Exception: Min Stock must be an integer" textFill="RED" wrapText="true" visible="false" StackPane.alignment="CENTER_LEFT" />
+            <StackPane fx:id="exceptMinStockIntPane" alignment="TOP_LEFT" managed="false" prefWidth="200.0">
+               <Label fx:id="exceptMinStockIntLabel" text="Exception: Min Stock must be an integer" textFill="RED" visible="false" wrapText="true" StackPane.alignment="CENTER_LEFT" />
             </StackPane>
          </VBox>
       </VBox>
@@ -141,13 +141,21 @@
                </columns>
             </TableView>
          </StackPane>
-         <StackPane prefHeight="95.0" prefWidth="379.0">
-            <Button fx:id="AddToProd" mnemonicParsing="false" onAction="#onAddToProd" text="Add Part to Product" StackPane.alignment="CENTER_RIGHT">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </Button>
-         </StackPane>
+         <HBox prefHeight="100.0" prefWidth="200.0">
+            <StackPane fx:id="exceptNoPartsPane" prefWidth="200.0">
+               <Label fx:id="exceptNoPartsLabel" text="No parts found. Change search input" textFill="RED" visible="false" wrapText="true">
+                  <font>
+                     <Font size="10.0" />
+                  </font></Label>
+            </StackPane>
+            <StackPane alignment="CENTER_RIGHT" prefHeight="150.0" prefWidth="200.0">
+               <Button fx:id="AddToProd" mnemonicParsing="false" onAction="#onAddToProd" text="Add Part to Product" StackPane.alignment="CENTER_RIGHT">
+                  <font>
+                     <Font size="12.0" />
+                  </font>
+               </Button>
+            </StackPane>
+         </HBox>
          <StackPane prefHeight="150.0" prefWidth="200.0">
             <TableView fx:id="partsTableAssoc" prefHeight="200.0" prefWidth="400.0">
                <columns>

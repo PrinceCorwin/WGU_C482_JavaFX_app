@@ -103,17 +103,15 @@
       </StackPane>
    </HBox>
    <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
-      <children>
-         <VBox prefHeight="400.0">
-            <StackPane fx:id="exceptNoPartsPane" managed="false" prefWidth="400.0">
-               <Label fx:id="exceptNoPartsLabel" text="No parts found. Change search input or ADD part"
-                      textFill="RED" visible="false" wrapText="true" StackPane.alignment="CENTER_LEFT"/>
-            </StackPane>
-            <StackPane fx:id="exceptSelectPartsPane" managed="false" prefWidth="400.0">
-               <Label fx:id="exceptSelectPartsLabel" text="A part must be selected before clicking DELETE button"
-                      textFill="RED" visible="false" wrapText="true" StackPane.alignment="CENTER_LEFT"/>
-            </StackPane>
-         </VBox>
-      </children>
+      <VBox prefHeight="400.0">
+         <StackPane fx:id="exceptNoPartsPane" managed="false" prefWidth="400.0">
+            <Label fx:id="exceptNoPartsLabel" text="No parts found. Change search input or ADD part"
+                   textFill="RED" visible="false" wrapText="true" StackPane.alignment="CENTER_LEFT"/>
+         </StackPane>
+         <StackPane fx:id="exceptSelectPartsPane" managed="false" prefWidth="400.0">
+            <Label fx:id="exceptSelectPartsLabel" text="A part must be selected before clicking DELETE button"
+                   textFill="RED" visible="false" wrapText="true" StackPane.alignment="CENTER_LEFT"/>
+         </StackPane>
+      </VBox>
    </HBox>
 </GridPane>
