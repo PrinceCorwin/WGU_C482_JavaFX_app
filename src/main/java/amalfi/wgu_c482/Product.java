@@ -3,10 +3,10 @@ package amalfi.wgu_c482;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-/**
-
- * @author Steve Amalfitano
+/** This class creates the AMALFI Makes It Inventory Management App.
+ * @author Steve Corwin Amalfitano.
  */
+
 public class Product {
     private final ObservableList<Part> associatedParts;
     private int id;
@@ -15,6 +15,16 @@ public class Product {
     private int stock;
     private int min;
     private int max;
+
+    /** Initializes new Product object
+     *
+     * @param id id of this product.
+     * @param name name of this product.
+     * @param price price of this product
+     * @param stock the number of this product in stock
+     * @param min the minimum allowed number of this product in stock
+     * @param max the maximum allowed number of this product in stock
+     */
     public Product(int id, String name, double price, int stock, int min, int max) {
         this.id = id;
         this.name = name;
@@ -82,28 +92,28 @@ public class Product {
     }
 
     /**
-     * @return the min (stock value) for the product
+     * @return the min for the product
      */
     public int getMin() {
         return min;
     }
 
     /**
-     * @param min the min (stock value) to set for the product
+     * @param min the min to set for the product
      */
     public void setMin(int min) {
         this.min = min;
     }
 
     /**
-     * @return the max (stock value) for the product
+     * @return the max for the product
      */
     public int getMax() {
         return max;
     }
 
     /**
-     * @param max the max (stock value) to set for the product
+     * @param max the max to set for the product
      */
     public void setMax(int max) {
         this.max = max;
@@ -113,7 +123,7 @@ public class Product {
      * @param part the part to add to the associatedParts list for the product
      */
     public void addAssociatePart(Part part) {
-        associatedParts.add(part);
+        this.associatedParts.add(part);
     }
 
     /**

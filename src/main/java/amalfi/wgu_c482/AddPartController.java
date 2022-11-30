@@ -2,7 +2,6 @@ package amalfi.wgu_c482;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -12,13 +11,13 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-import java.net.URL;
 import java.util.Objects;
-import java.util.ResourceBundle;
 
-public class AddPartController implements Initializable {
+/** Controls the behavior of the mainScreen.fxml scene. Provides functionality to either add
+ * new part or modify existing part, based on user input into the displayed form.
+ */
+public class AddPartController {
     public TextField partNameField;
     public TextField partStockField;
     public TextField partPriceField;
@@ -52,10 +51,19 @@ public class AddPartController implements Initializable {
 
     public Label titleLabel;
 
+    /**
+     * sets the modifiedPart variable to a selected part from the mainScreen controller
+     * @param part the part to set
+     */
     public static void setModifiedPart(Part part) {
         modifiedPart = part;
     }
 
+    /**
+     * replaces current scene with the mainScreen.fxml scene
+     * @param e the action event
+     * @throws IOException Catches any exceptions thrown during data input / output
+     */
     private void backToMain(ActionEvent e) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/amalfi/wgu_c482/mainScreen.fxml")));
         Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
@@ -63,6 +71,12 @@ public class AddPartController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
+    /**
+     * Checks a string to conversion to an integer
+     * @param str the string to check
+     * @return true if string is converted, false if not
+     */
     private boolean checkForInt(String str) {
         try {
             Integer.parseInt(str);
@@ -72,6 +86,10 @@ public class AddPartController implements Initializable {
         }
         return true;
     }
+
+    /**
+     * hide all error messages
+     */
     private void hideErrors() {
         exceptStockIntLabel.setVisible(false);
         exceptStockIntPane.setManaged(false);
@@ -92,14 +110,27 @@ public class AddPartController implements Initializable {
         exceptPartNameLabel.setVisible(false);
         exceptPartNamePane.setManaged(false);
     }
+
+    /**
+     * Changes the specTagLabel to "Machine ID" if InHouse radio btn is selected
+     */
     public void onInHouseRadio() {
         specTagLabel.setText("Machine ID");
     }
 
+    /**
+     * Changes the specTagLabel to "Company Name" if Outsourced radio btn is selected
+     */
     public void onOutsourcedRadio() {
         specTagLabel.setText("Company Name");
     }
 
+    /**
+     * After validating user input, new part is added to inventory or
+     * modified part is updated to inventory
+     * @param actionEvent the action event
+     * @throws IOException Catches any exceptions thrown during data input / output
+     */
     public void onPartSave(ActionEvent actionEvent) throws IOException {
         hideErrors();
         String name = "";
@@ -149,7 +180,7 @@ public class AddPartController implements Initializable {
         }
         if (inHouseRadio.isSelected()) {
             if (checkForInt(specTagField.getText())) {
-                max = Integer.parseInt((specTagField.getText()));
+                machineId = Integer.parseInt((specTagField.getText()));
             }
             else {
                 exceptMachineIntLabel.setVisible(true);
@@ -213,14 +244,29 @@ public class AddPartController implements Initializable {
         }
     }
 
+    /**
+     * Upon button click, sets modifiedPart back to null and replaces current scene with mainScreen scene
+     * @param actionEvent the action event
+     * @throws IOException Catches any exceptions thrown during data input / output
+     */
     public void onPartCancel(ActionEvent actionEvent) throws IOException {
         modifiedPart = null;
         backToMain(actionEvent);
     }
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    /** RUNTIME ERROR - Initializes the form with existing data if part has been selected and modify button clicked on mainScreen.
+     * Also initializes the search real-time search functionality of the search field
+     * Being that both the Outsourced and InHouse parts are saved to inventory as the Part class,
+     * I was not able to prefill the input fields of the machineID and companyName attributes through the Part superclass methods
+     * when modifying an existing part.
+     * I had to convert the Part objects back to their subclasses first by using the getClass().getSimpleName().equals() methods to
+     * retrieve the subclass names.
+     * Based on the classname found I could convert the Part object back to an Outsourced or InHouse object using
+     * Outsourced newModPart = ((Outsourced)modifiedPart) or InHouse newModPart = ((InHouse)modifiedPart).
+     * Then I could access the machineId or companyName to prefill the input fields
+     */
+    public void initialize() {
         if (modifiedPart != null) {
-            System.out.println(modifiedPart.getClass().getSimpleName());
             titleLabel.setText("Modify Part");
             partNameField.setText(modifiedPart.getName());
             partStockField.setText(String.valueOf(modifiedPart.getStock()));
@@ -238,10 +284,6 @@ public class AddPartController implements Initializable {
                 specTagLabel.setText("Company Name");
                 specTagField.setText(String.valueOf(newModPart.getCompanyName()));
             }
-
-
         }
-
-
     }
 }

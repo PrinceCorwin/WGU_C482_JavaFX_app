@@ -5,7 +5,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,15 +12,14 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-import java.net.URL;
 import java.util.Objects;
-import java.util.ResourceBundle;
 
-public class AddProductController implements Initializable {
-
-
+/**
+ * Controls the behavior of the addProduct.fxml scene. Provides functionality to either
+ * add new product or modify existing product, based on user input to the displayed form.
+ */
+public class AddProductController {
     public StackPane exceptStockIntPane;
     public Label exceptStockIntLabel;
     public StackPane exceptBetweenMinMaxPane;
@@ -62,6 +60,10 @@ public class AddProductController implements Initializable {
     private static Product modifiedProd = null;
     public Label titleLabel;
 
+    /**
+     * Sets modifiedProd variable to selected product to be modified from the mainScreen controller.
+     * @param prod the product to set
+     */
     public static void setModifiedProd(Product prod) {
         modifiedProd = prod;
     }
@@ -69,6 +71,9 @@ public class AddProductController implements Initializable {
     @FXML
     private TextField searchParts;
 
+    /**
+     * Associates selected part to the current product and adds to the associated parts table
+     */
     public void associatePart() {
         exceptNoPartsLabel.setVisible(false);
         try {
@@ -88,6 +93,10 @@ public class AddProductController implements Initializable {
         }
     }
 
+    /**
+     * Removes selected part from being associated with the current product and removes from the
+     * associated parts table
+     */
     public void onRemoveAssocPart(){
         exceptNoPartsLabel.setVisible(false);
         try {
@@ -101,6 +110,11 @@ public class AddProductController implements Initializable {
         }
     }
 
+    /**
+     * replaces current scene with the mainScreen.fxml scene
+     * @param e the action event
+     * @throws IOException Catches any exceptions thrown during data input / output
+     */
     private void backToMain(ActionEvent e) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/amalfi/wgu_c482/mainScreen.fxml")));
         Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
@@ -109,6 +123,11 @@ public class AddProductController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Checks a string to conversion to an integer
+     * @param str the string to check
+     * @return true if string is converted, false if not
+     */
     private boolean checkForInt(String str) {
         try {
            Integer.parseInt(str);
@@ -119,6 +138,9 @@ public class AddProductController implements Initializable {
         return true;
     }
 
+    /**
+     * hide all error messages
+     */
     private void hideErrors() {
         exceptStockIntLabel.setVisible(false);
         exceptStockIntPane.setManaged(false);
@@ -136,7 +158,12 @@ public class AddProductController implements Initializable {
         exceptMinMaxLabel.setVisible(false);
     }
 
-
+    /**
+     * Checks all fields for valid data and either saves a new product to inventory
+     * or updates a modified part to inventory
+     * @param actionEvent the action event
+     * @throws IOException Catches any exceptions thrown during data input / outputCatches any exceptions thrown during data input / output
+     */
     public void onProdSave(ActionEvent actionEvent) throws IOException {
         hideErrors();
         String name = "";
@@ -205,12 +232,30 @@ public class AddProductController implements Initializable {
         if (noErrors) {
             Product newProd;
             if (modifiedProd != null) {
-                newProd = new Product(modifiedProd.getId(), name, price, stock, min, max);
-                for (Part item : associatedParts) {
-                    newProd.addAssociatePart(item);
+                modifiedProd.setName(name);
+                modifiedProd.setPrice(price);
+                modifiedProd.setMin(min);
+                modifiedProd.setMax(max);
+                modifiedProd.setStock(stock);
+                ObservableList<Part> currentParts = modifiedProd.getAllAssociatedParts();
+                for (Part part :
+                        currentParts) {
+                    if (!associatedParts.contains(part)) {
+                        modifiedProd.deleteAssociatePart(part);
+                    }
                 }
+                for (Part part :
+                        associatedParts) {
+                    if(!currentParts.contains(part)) {
+                        modifiedProd.addAssociatePart(part);
+                    }
+                }
+//                newProd = new Product(modifiedProd.getId(), name, price, stock, min, max);
+//                for (Part item : associatedParts) {
+//                    newProd.addAssociatePart(item);
+//                }
                 int index = Inventory.getAllProducts().indexOf(modifiedProd);
-                Inventory.updateProduct(index, newProd);
+                Inventory.updateProduct(index, modifiedProd);
             }
             else {
                 newProd = new Product(UniqueID.getUniqueProdID(), name, price, stock, min, max);
@@ -224,13 +269,22 @@ public class AddProductController implements Initializable {
         }
     }
 
+    /**
+     * Upon button click, sets modifiedProd back to null and replaces current scene with mainScreen scene
+     * @param actionEvent the action event
+     * @throws IOException Catches any exceptions thrown during data input / output
+     */
     public void onProdCancel(ActionEvent actionEvent) throws IOException {
         modifiedProd = null;
         backToMain(actionEvent);
 
     }
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+
+    /**
+     * Initializes the form with existing data if product has been selected and modify button clicked on mainScreen.
+     * Also initializes the search real-time search functionality of the search field
+     */
+    public void initialize() {
         partIdSearchCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         partNameSearchCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         partStockSearchCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
@@ -255,7 +309,6 @@ public class AddProductController implements Initializable {
         searchParts.textProperty().addListener((obs, oldText, newText) -> {
             exceptNoPartsLabel.setText("No parts found. Change search input");
             exceptNoPartsLabel.setVisible(false);
-//            exceptNoPartsPane.setManaged(false);
             ObservableList<Part> newParts = Inventory.lookupPart(newText);
             try {
                 int id = Integer.parseInt((newText));
@@ -269,7 +322,6 @@ public class AddProductController implements Initializable {
             }
             if (newParts.size() == 0) {
                 exceptNoPartsLabel.setVisible(true);
-//                exceptNoPartsPane.setManaged(true);
             }
             partsTableSearch.setItems(newParts);
         });

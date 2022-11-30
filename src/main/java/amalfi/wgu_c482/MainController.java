@@ -5,7 +5,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,14 +12,14 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-import java.net.URL;
 import java.util.Objects;
-import java.util.ResourceBundle;
 
-/** This is my first javadoc comment */
-public class MainController implements Initializable {
+/**
+ * Class to control the mainScreen scene behavior. Displays the parts and products tables, as well as
+ * search fields for both. Controls behavior of add, modify and exit buttons.
+ */
+public class MainController {
 
     public StackPane exceptNoPartsPane;
     public Label exceptNoPartsLabel;
@@ -56,6 +55,11 @@ public class MainController implements Initializable {
     @FXML
     private TextField searchProds;
 
+    /**
+     * Upon button click, scene is replaced by the addPart.fxml scene for a new part to be added
+     * @param actionEvent the action event
+     * @throws IOException Catches any exceptions thrown during data input / output
+     */
     public void onAddPart(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/amalfi/wgu_c482/addPart.fxml")));
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
@@ -64,6 +68,12 @@ public class MainController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Upon button click, scene is replaced by the addPart.fxml scene and the selected part is stored in the
+     * addPartController to be modified
+     * @param actionEvent the action event
+     * @throws IOException Catches any exceptions thrown during data input / output
+     */
     public void onModPart(ActionEvent actionEvent) throws IOException {
         Part part = partsTable.getSelectionModel().getSelectedItem();
         AddPartController.setModifiedPart(part);
@@ -74,6 +84,9 @@ public class MainController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Deletes a selected part from Inventory and the parts table
+     */
     public void onDelPart() {
         exceptSelectPartsLabel.setVisible(false);
         exceptSelectPartsPane.setManaged(false);
@@ -89,6 +102,12 @@ public class MainController implements Initializable {
             exceptSelectPartsPane.setManaged(true);
         }
     }
+
+    /**
+     * Upon button click, scene is replaced by the addProduct.fxml scene for a new Product to be added
+     * @param actionEvent the action event
+     * @throws IOException Catches any exceptions thrown during data input / output
+     */
     public void onAddProd(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/amalfi/wgu_c482/addProduct.fxml")));
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
@@ -97,6 +116,12 @@ public class MainController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Upon button click, scene is replaced by the addProduct.fxml scene and the selected product is stored in the
+     * addProductController to be modified
+     * @param actionEvent the action event
+     * @throws IOException Catches any exceptions thrown during data input / output
+     */
     public void onModProd(ActionEvent actionEvent) throws IOException {
         Product prod = productsTable.getSelectionModel().getSelectedItem();
         AddProductController.setModifiedProd(prod);
@@ -106,6 +131,10 @@ public class MainController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
+    /**
+     * Deletes a selected product from inventory and the products table
+     */
     public void onDelProd() {
         exceptSelectProdLabel.setVisible(false);
         exceptSelectProdPane.setManaged(false);
@@ -127,12 +156,19 @@ public class MainController implements Initializable {
             exceptSelectProdPane.setManaged(true);
         }
     }
+
+    /**
+     * Exits the program
+     */
     public void onExit() {
         Platform.exit();
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    /**
+     * Initializes the parts and products tables by adding testdata.
+     * Real-time search functionality of the parts and products search fields are also initialized.
+     */
+    public void initialize() {
 
         partIDCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         partNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));

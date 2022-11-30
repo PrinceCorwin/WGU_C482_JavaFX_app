@@ -1,9 +1,6 @@
-package amalfi.wgu_c482; /**
-* Supplied class Part.java 
- */
-
+package amalfi.wgu_c482;
 /**
- *
+ * Supplied class Part.java
  * @author Steve Corwin Amalfitano
  */
 public abstract class Part {

@@ -50,10 +50,22 @@
          </columns>
       </TableView>
       <HBox prefHeight="100.0" prefWidth="200.0">
-         <Button fx:id="addPart" mnemonicParsing="false" onAction="#onAddPart" text="ADD" />
+         <Button fx:id="addPart" mnemonicParsing="false" onAction="#onAddPart" text="ADD">
+            <HBox.margin>
+               <Insets right="20.0" />
+            </HBox.margin></Button>
          <Button fx:id="modPart" mnemonicParsing="false" onAction="#onModPart" text="MODIFY" />
-         <Button fx:id="delPart" mnemonicParsing="false" onAction="#onDelPart" text="DELETE" />
+         <Button fx:id="delPart" mnemonicParsing="false" onAction="#onDelPart" style="-fx-background-color: pink;" text="DELETE" textFill="RED">
+            <HBox.margin>
+               <Insets left="50.0" />
+            </HBox.margin></Button>
+         <padding>
+            <Insets top="20.0" />
+         </padding>
       </HBox>
+      <padding>
+         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+      </padding>
    </VBox>
    <VBox layoutX="10.0" layoutY="55.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
       <HBox prefHeight="100.0" prefWidth="200.0">
@@ -81,10 +93,22 @@
          </columns>
       </TableView>
       <HBox prefHeight="100.0" prefWidth="200.0">
-         <Button fx:id="addProd" mnemonicParsing="false" onAction="#onAddProd" text="ADD" />
+         <Button fx:id="addProd" mnemonicParsing="false" onAction="#onAddProd" text="ADD">
+            <HBox.margin>
+               <Insets right="20.0" />
+            </HBox.margin></Button>
          <Button fx:id="modProd" mnemonicParsing="false" onAction="#onModProd" text="MODIFY" />
-         <Button fx:id="delProd" mnemonicParsing="false" onAction="#onDelProd" text="DELETE" />
+         <Button fx:id="delProd" mnemonicParsing="false" onAction="#onDelProd" style="-fx-background-color: pink;" text="DELETE" textFill="RED">
+            <HBox.margin>
+               <Insets left="50.0" />
+            </HBox.margin></Button>
+         <padding>
+            <Insets top="20.0" />
+         </padding>
       </HBox>
+      <padding>
+         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+      </padding>
    </VBox>
    <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="600.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
       <VBox prefHeight="200.0" prefWidth="400.0">
@@ -105,12 +129,10 @@
    <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
       <VBox prefHeight="400.0">
          <StackPane fx:id="exceptNoPartsPane" managed="false" prefWidth="400.0">
-            <Label fx:id="exceptNoPartsLabel" text="No parts found. Change search input or ADD part"
-                   textFill="RED" visible="false" wrapText="true" StackPane.alignment="CENTER_LEFT"/>
+            <Label fx:id="exceptNoPartsLabel" text="No parts found. Change search input or ADD part" textFill="RED" visible="false" wrapText="true" StackPane.alignment="CENTER_LEFT" />
          </StackPane>
          <StackPane fx:id="exceptSelectPartsPane" managed="false" prefWidth="400.0">
-            <Label fx:id="exceptSelectPartsLabel" text="A part must be selected before clicking DELETE button"
-                   textFill="RED" visible="false" wrapText="true" StackPane.alignment="CENTER_LEFT"/>
+            <Label fx:id="exceptSelectPartsLabel" text="A part must be selected before clicking DELETE button" textFill="RED" visible="false" wrapText="true" StackPane.alignment="CENTER_LEFT" />
          </StackPane>
       </VBox>
    </HBox>

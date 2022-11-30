@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"amalfi.wgu_c482","l":"amalfi.wgu_c482"}];updateSearchResults();

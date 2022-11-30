@@ -124,13 +124,22 @@
          </VBox>
       </VBox>
       <VBox prefWidth="400.0">
-         <StackPane prefHeight="75.0" prefWidth="379.0">
-            <TextField fx:id="searchParts" maxWidth="-Infinity" prefWidth="200.0" promptText="Search by Part ID or Name" StackPane.alignment="CENTER_RIGHT">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </TextField>
-         </StackPane>
+         <HBox prefHeight="100.0" prefWidth="200.0">
+            <children>
+               <StackPane prefHeight="150.0" prefWidth="200.0">
+                  <children>
+                     <Label text="All Parts" StackPane.alignment="BOTTOM_LEFT" />
+                  </children>
+               </StackPane>
+               <StackPane prefHeight="75.0" prefWidth="379.0">
+                  <TextField fx:id="searchParts" maxWidth="-Infinity" prefWidth="200.0" promptText="Search by Part ID or Name" StackPane.alignment="CENTER_RIGHT">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </TextField>
+               </StackPane>
+            </children>
+         </HBox>
          <StackPane prefHeight="150.0" prefWidth="200.0">
             <TableView fx:id="partsTableSearch" prefHeight="200.0" prefWidth="400.0">
                <columns>
@@ -147,6 +156,7 @@
                   <font>
                      <Font size="10.0" />
                   </font></Label>
+               <Label text="Associated Parts" StackPane.alignment="BOTTOM_LEFT" />
             </StackPane>
             <StackPane alignment="CENTER_RIGHT" prefHeight="150.0" prefWidth="200.0">
                <Button fx:id="AddToProd" mnemonicParsing="false" onAction="#associatePart" text="Associate Part" StackPane.alignment="CENTER_RIGHT">
