@@ -48,25 +48,14 @@ public class AddPartController implements Initializable {
     public RadioButton outSourcedRadio;
     public TextField specTagField;
     public Label specTagLabel;
-    private static InHouse inHousePart = null;
-    private static Outsourced outsourcedPart = null;
+    private static Part modifiedPart = null;
+
     public Label titleLabel;
-    public String partClass = "";
 
-    public static void setInHousePart(InHouse part) {
-        inHousePart = part;
-    }
-    public static void setOutsourcedPart(Outsourced part) { outsourcedPart = part; }
-
-
-    public void onPartSave(ActionEvent actionEvent) throws IOException {
-        backToMain(actionEvent);
-
+    public static void setModifiedPart(Part part) {
+        modifiedPart = part;
     }
 
-    public void onPartCancel(ActionEvent actionEvent) throws IOException {
-        backToMain(actionEvent);
-    }
     private void backToMain(ActionEvent e) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/amalfi/wgu_c482/mainScreen.fxml")));
         Stage stage = (Stage)((Node)e.getSource()).getScene().getWindow();
@@ -111,8 +100,148 @@ public class AddPartController implements Initializable {
         specTagLabel.setText("Company Name");
     }
 
+    public void onPartSave(ActionEvent actionEvent) throws IOException {
+        hideErrors();
+        String name = "";
+        boolean noErrors = true;
+        int stock = 0;
+        int max = 0;
+        int min = 0;
+        double price = 0.00;
+        int machineId = 0;
+        String compName = "";
+
+        if (checkForInt(partStockField.getText())) {
+            stock = Integer.parseInt(partStockField.getText());
+        }
+        else {
+            exceptStockIntLabel.setVisible(true);
+            exceptStockIntPane.setManaged(true);
+            noErrors = false;
+        }
+        if (checkForInt(partMinField.getText())) {
+            min = Integer.parseInt(partMinField.getText());
+        }
+        else {
+            exceptMinStockIntLabel.setVisible(true);
+            exceptMinStockIntPane.setManaged(true);
+            noErrors = false;
+        }
+        if (checkForInt(partMaxField.getText())) {
+            max = Integer.parseInt((partMaxField.getText()));
+        }
+        else {
+            exceptMaxStockIntLabel.setVisible(true);
+            exceptMaxStockIntPane.setManaged(true);
+            noErrors = false;
+        }
+        if (noErrors) {
+            if (stock > max || stock < min) {
+                exceptBetweenMinMaxLabel.setVisible(true);
+                exceptBetweenMinMaxPane.setManaged(true);
+                noErrors = false;
+            }
+            if (min >= max) {
+                exceptMinMaxPane.setManaged(true);
+                exceptMinMaxLabel.setVisible(true);
+                noErrors = false;
+            }
+        }
+        if (inHouseRadio.isSelected()) {
+            if (checkForInt(specTagField.getText())) {
+                max = Integer.parseInt((specTagField.getText()));
+            }
+            else {
+                exceptMachineIntLabel.setVisible(true);
+                exceptMachineIntPane.setManaged(true);
+                noErrors = false;
+            }
+        }
+
+        if (outSourcedRadio.isSelected()) {
+            if (specTagField.getText().isBlank()) {
+                exceptCompNameLabel.setVisible(true);
+                exceptCompNamePane.setManaged(true);
+                noErrors = false;
+            }
+            else {
+                compName = specTagField.getText();
+            }
+        }
+
+        try {
+            price = Double.parseDouble(partPriceField.getText());
+        }
+        catch(NumberFormatException e) {
+            exceptPriceDoublePane.setManaged(true);
+            exceptPriceDoubleLabel.setVisible(true);
+            noErrors = false;
+        }
+        if (partNameField.getText().isBlank()) {
+            exceptPartNameLabel.setVisible(true);
+            exceptPartNamePane.setManaged(true);
+            noErrors = false;
+        }
+        else {
+            name = partNameField.getText();
+        }
+        if (noErrors) {
+            Part newPart;
+            if (modifiedPart != null) {
+                if (inHouseRadio.isSelected()) {
+                    newPart = new InHouse(modifiedPart.getId(), name, price, stock, min, max, machineId);
+                }
+                else {
+                    newPart = new Outsourced(modifiedPart.getId(), name, price, stock, min, max, compName);
+                }
+
+                int index = Inventory.getAllParts().indexOf(modifiedPart);
+                Inventory.updatePart(index, newPart);
+            }
+            else {
+                if (inHouseRadio.isSelected()) {
+                    newPart = new InHouse(UniqueID.getUniquePartID(), name, price, stock, min, max, machineId);
+                }
+                else {
+                    newPart = new Outsourced(UniqueID.getUniquePartID(), name, price, stock, min, max, compName);
+                }
+                Inventory.addPart(newPart);
+
+            }
+            modifiedPart = null;
+            backToMain(actionEvent);
+        }
+    }
+
+    public void onPartCancel(ActionEvent actionEvent) throws IOException {
+        modifiedPart = null;
+        backToMain(actionEvent);
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (modifiedPart != null) {
+            System.out.println(modifiedPart.getClass().getSimpleName());
+            titleLabel.setText("Modify Part");
+            partNameField.setText(modifiedPart.getName());
+            partStockField.setText(String.valueOf(modifiedPart.getStock()));
+            partMinField.setText(String.valueOf(modifiedPart.getMin()));
+            partMaxField.setText(String.valueOf(modifiedPart.getMax()));
+            partPriceField.setText(String.valueOf(modifiedPart.getPrice()));
+            if (modifiedPart.getClass().getSimpleName().equals("InHouse")) {
+                InHouse newModPart = ((InHouse)modifiedPart);
+                inHouseRadio.setSelected(true);
+                specTagLabel.setText("Machine ID");
+                specTagField.setText(String.valueOf(newModPart.getMachineId()));
+            } else {
+                Outsourced newModPart = ((Outsourced)modifiedPart);
+                outSourcedRadio.setSelected(true);
+                specTagLabel.setText("Company Name");
+                specTagField.setText(String.valueOf(newModPart.getCompanyName()));
+            }
+
+
+        }
+
 
     }
 }

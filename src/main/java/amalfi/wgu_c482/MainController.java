@@ -65,7 +65,9 @@ public class MainController implements Initializable {
     }
 
     public void onModPart(ActionEvent actionEvent) throws IOException {
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/amalfi/wgu_c482/modPart.fxml")));
+        Part part = partsTable.getSelectionModel().getSelectedItem();
+        AddPartController.setModifiedPart(part);
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/amalfi/wgu_c482/addPart.fxml")));
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         Scene scene = new Scene(root, 600, 700);
         stage.setScene(scene);
