@@ -14,6 +14,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Controls the behavior of the addProduct.fxml scene. Provides functionality to either
@@ -97,18 +98,29 @@ public class AddProductController {
      * Removes selected part from being associated with the current product and removes from the
      * associated parts table
      */
-    public void onRemoveAssocPart(){
+    public void onRemoveAssocPart() {
         exceptNoPartsLabel.setVisible(false);
+        boolean nullPointer = true;
+        Part deletedPart = partsTableAssoc.getSelectionModel().getSelectedItem();
         try {
-            Part deletedPart = partsTableAssoc.getSelectionModel().getSelectedItem();
-            associatedParts.remove(deletedPart);
-            partsTableAssoc.setItems(associatedParts);
-        }
-        catch (NullPointerException e) {
+            String thisName = deletedPart.getName();
+            nullPointer = false;
+        } catch (NullPointerException e) {
             exceptNoPartsLabel.setText("Part must be selected before removing");
             exceptNoPartsLabel.setVisible(true);
         }
+        if (!nullPointer) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirm Remove");
+            alert.setHeaderText("Remove " + deletedPart.getName() + "?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+                associatedParts.remove(deletedPart);
+                partsTableAssoc.setItems(associatedParts);
+            }
+        }
     }
+
 
     /**
      * replaces current scene with the mainScreen.fxml scene
@@ -250,10 +262,7 @@ public class AddProductController {
                         modifiedProd.addAssociatePart(part);
                     }
                 }
-//                newProd = new Product(modifiedProd.getId(), name, price, stock, min, max);
-//                for (Part item : associatedParts) {
-//                    newProd.addAssociatePart(item);
-//                }
+
                 int index = Inventory.getAllProducts().indexOf(modifiedProd);
                 Inventory.updateProduct(index, modifiedProd);
             }

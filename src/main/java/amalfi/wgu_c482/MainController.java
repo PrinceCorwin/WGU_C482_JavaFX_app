@@ -14,6 +14,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Class to control the mainScreen scene behavior. Displays the parts and products tables, as well as
@@ -85,21 +86,34 @@ public class MainController {
     }
 
     /**
-     * Deletes a selected part from Inventory and the parts table
+     * Deletes a selected part from Inventory and the parts table after verifying intent to delete from user
      */
     public void onDelPart() {
         exceptSelectPartsLabel.setVisible(false);
         exceptSelectPartsPane.setManaged(false);
+        boolean nullPointer = true;
+        Part deletedPart = partsTable.getSelectionModel().getSelectedItem();
         try {
-            Part deletedPart = partsTable.getSelectionModel().getSelectedItem();
-            if (Inventory.deletePart(deletedPart)) {
-                parts = Inventory.getAllParts();
-                partsTable.setItems(parts);
-            }
+            String thisName = deletedPart.getName();
+            nullPointer = false;
         }
         catch (NullPointerException e) {
             exceptSelectPartsLabel.setVisible(true);
             exceptSelectPartsPane.setManaged(true);
+        }
+
+//        Optional<ButtonType> result = alert.showAndWait();
+        if (!nullPointer) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirm Delete");
+            alert.setHeaderText("Delete " + deletedPart.getName() + "?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                if (Inventory.deletePart(deletedPart)) {
+                    parts = Inventory.getAllParts();
+                    partsTable.setItems(parts);
+                }
+            }
         }
     }
 
@@ -133,29 +147,45 @@ public class MainController {
     }
 
     /**
-     * Deletes a selected product from inventory and the products table
+     * Deletes a selected product from inventory and the products table after verifying user intent to delete with alert box
      */
     public void onDelProd() {
         exceptSelectProdLabel.setVisible(false);
         exceptSelectProdPane.setManaged(false);
         exceptRemoveAssocPartsLabel.setVisible(false);
         exceptRemoveAssocPartsPane.setManaged(false);
+        boolean nullPointer = true;
+        Product deletedProduct = productsTable.getSelectionModel().getSelectedItem();
         try {
-            Product deletedProduct = productsTable.getSelectionModel().getSelectedItem();
-            if (Inventory.deleteProduct(deletedProduct)) {
-                products = Inventory.getAllProducts();
-                productsTable.setItems(products);
-            }
-            else {
-                exceptRemoveAssocPartsLabel.setVisible(true);
-                exceptRemoveAssocPartsPane.setManaged(true);
-            }
+            String thisName = deletedProduct.getName();
+            nullPointer = false;
         }
         catch (NullPointerException e) {
             exceptSelectProdLabel.setVisible(true);
             exceptSelectProdPane.setManaged(true);
         }
+        if (!nullPointer) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirm Delete");
+            alert.setHeaderText("Delete " + deletedProduct.getName() + "?");
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK){
+                if (Inventory.deleteProduct(deletedProduct)) {
+                    products = Inventory.getAllProducts();
+                    productsTable.setItems(products);
+                }
+                else {
+                    exceptRemoveAssocPartsLabel.setVisible(true);
+                    exceptRemoveAssocPartsPane.setManaged(true);
+                }
+            }
+        }
+        else {
+            exceptSelectProdLabel.setVisible(true);
+            exceptSelectProdPane.setManaged(true);
+        }
     }
+
 
     /**
      * Exits the program
