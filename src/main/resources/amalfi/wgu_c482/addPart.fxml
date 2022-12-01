@@ -50,13 +50,13 @@
             <Label text="Name" StackPane.alignment="CENTER_LEFT" />
          </StackPane>
          <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="2">
-            <Label text="Stock" StackPane.alignment="CENTER_LEFT" />
+            <Label text="Inv" StackPane.alignment="CENTER_LEFT" />
          </StackPane>
          <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="3">
-            <Label text="Price" StackPane.alignment="CENTER_LEFT" />
+            <Label text="Price/Cost" StackPane.alignment="CENTER_LEFT" />
          </StackPane>
          <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="4">
-            <Label text="Max Stock" StackPane.alignment="CENTER_LEFT" />
+            <Label text="Max" StackPane.alignment="CENTER_LEFT" />
          </StackPane>
          <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.rowIndex="5">
             <Label fx:id="specTagLabel" text="Machine ID" StackPane.alignment="CENTER_LEFT" />
@@ -84,7 +84,7 @@
             <TextField fx:id="specTagField" />
          </StackPane>
          <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
-            <Label text="Min Stock" />
+            <Label text="Min" />
          </StackPane>
          <StackPane prefHeight="150.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="4">
             <TextField fx:id="partMinField" StackPane.alignment="CENTER_LEFT" />

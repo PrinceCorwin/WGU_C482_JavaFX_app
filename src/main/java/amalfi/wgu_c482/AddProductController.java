@@ -112,7 +112,8 @@ public class AddProductController {
         if (!nullPointer) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirm Remove");
-            alert.setHeaderText("Remove " + deletedPart.getName() + "?");
+            alert.setHeaderText("Remove " + deletedPart.getName());
+            alert.setContentText("Are you sure?");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK) {
                 associatedParts.remove(deletedPart);

@@ -106,7 +106,8 @@ public class MainController {
         if (!nullPointer) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirm Delete");
-            alert.setHeaderText("Delete " + deletedPart.getName() + "?");
+            alert.setHeaderText("Delete " + deletedPart.getName());
+            alert.setContentText("Are you sure?");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK){
                 if (Inventory.deletePart(deletedPart)) {
@@ -125,7 +126,7 @@ public class MainController {
     public void onAddProd(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/amalfi/wgu_c482/addProduct.fxml")));
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 800, 500);
+        Scene scene = new Scene(root, 900, 500);
         stage.setScene(scene);
         stage.show();
     }
@@ -167,7 +168,8 @@ public class MainController {
         if (!nullPointer) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirm Delete");
-            alert.setHeaderText("Delete " + deletedProduct.getName() + "?");
+            alert.setHeaderText("Delete " + deletedProduct.getName());
+            alert.setContentText("Are you sure?");
             Optional<ButtonType> result = alert.showAndWait();
             if (result.get() == ButtonType.OK){
                 if (Inventory.deleteProduct(deletedProduct)) {
