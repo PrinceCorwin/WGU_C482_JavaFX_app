@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="amalfi.wgu_c482.MainController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" stylesheets="@../../style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="amalfi.wgu_c482.MainController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -19,12 +19,12 @@
       <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
    </padding>
    <StackPane prefHeight="150.0" prefWidth="200.0">
-      <Label text="Inventory Management System" StackPane.alignment="CENTER">
+      <Label style="-fx-font-family: Verdana;" text="Inventory Management System" StackPane.alignment="CENTER">
          <font>
             <Font size="24.0" />
          </font></Label>
    </StackPane>
-   <VBox prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
+   <VBox id="partsTable" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
       <HBox prefHeight="100.0" prefWidth="600.0">
          <StackPane prefHeight="59.0" prefWidth="200.0">
             <Label text="Parts" StackPane.alignment="CENTER_LEFT">
@@ -33,7 +33,7 @@
                </font>
             </Label>
          </StackPane>
-         <StackPane prefHeight="59.0" prefWidth="400.0">
+         <StackPane id="searchBarParent" prefHeight="59.0" prefWidth="400.0">
             <TextField fx:id="searchParts" maxWidth="-Infinity" prefHeight="26.0" prefWidth="200.0" promptText="Search by Part ID or Name" StackPane.alignment="CENTER">
                <font>
                   <Font size="12.0" />
@@ -50,12 +50,12 @@
          </columns>
       </TableView>
       <HBox prefHeight="100.0" prefWidth="200.0">
-         <Button fx:id="addPart" mnemonicParsing="false" onAction="#onAddPart" text="ADD">
+         <Button fx:id="addPart" mnemonicParsing="false" onAction="#onAddPart" style="-fx-background-color: linear-gradient(#f0ff35, #a9ff00),        radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%); -fx-background-insets: 0,1; -fx-background-radius: 30; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );" text="ADD">
             <HBox.margin>
                <Insets right="20.0" />
             </HBox.margin></Button>
-         <Button fx:id="modPart" mnemonicParsing="false" onAction="#onModPart" text="MODIFY" />
-         <Button fx:id="delPart" mnemonicParsing="false" onAction="#onDelPart" style="-fx-background-color: pink;" text="DELETE" textFill="RED">
+         <Button fx:id="modPart" mnemonicParsing="false" onAction="#onModPart" style="-fx-background-color: linear-gradient(#f0ff35, #a9ff00),        radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%); -fx-background-insets: 0,1; -fx-background-radius: 30; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );" text="MODIFY" />
+         <Button fx:id="delPart" mnemonicParsing="false" onAction="#onDelPart" style="-fx-background-color: linear-gradient(#ffe8e8, #ffcfcf), radial-gradient(center 50% -40%, radius 200%, #ff5400 45%, #be1d00 50%); -fx-background-insets: 0, 1; -fx-background-radius: 30; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );" text="DELETE" textFill="WHITE">
             <HBox.margin>
                <Insets left="50.0" />
             </HBox.margin></Button>
@@ -93,12 +93,12 @@
          </columns>
       </TableView>
       <HBox prefHeight="100.0" prefWidth="200.0">
-         <Button fx:id="addProd" mnemonicParsing="false" onAction="#onAddProd" text="ADD">
+         <Button fx:id="addProd" mnemonicParsing="false" onAction="#onAddProd" style="-fx-background-color: linear-gradient(#f0ff35, #a9ff00),        radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%); -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 ); -fx-background-radius: 30; -fx-background-insets: 0, 1;" text="ADD" textFill="#395306">
             <HBox.margin>
                <Insets right="20.0" />
             </HBox.margin></Button>
-         <Button fx:id="modProd" mnemonicParsing="false" onAction="#onModProd" text="MODIFY" />
-         <Button fx:id="delProd" mnemonicParsing="false" onAction="#onDelProd" style="-fx-background-color: pink;" text="DELETE" textFill="RED">
+         <Button fx:id="modProd" mnemonicParsing="false" onAction="#onModProd" style="-fx-background-color: linear-gradient(#f0ff35, #a9ff00),        radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%); -fx-background-insets: 0, 1; -fx-background-radius: 30; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );" text="MODIFY" textFill="#395306" />
+         <Button fx:id="delProd" mnemonicParsing="false" onAction="#onDelProd" style="-fx-background-color: linear-gradient(#ffe8e8, #ffcfcf), radial-gradient(center 50% -40%, radius 200%, #ff5400 45%, #be1d00 50%);; -fx-background-radius: 30; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );" text="DELETE" textFill="#eeeeee">
             <HBox.margin>
                <Insets left="50.0" />
             </HBox.margin></Button>
@@ -119,11 +119,11 @@
             <Label fx:id="exceptNoProdLabel" prefWidth="400.0" text="No products found. Change search input or ADD product" textFill="RED" visible="false" wrapText="true" StackPane.alignment="CENTER_LEFT" />
          </StackPane>
          <StackPane fx:id="exceptSelectProdPane" managed="false" prefWidth="400.0">
-            <Label fx:id="exceptSelectProdLabel" text="Select a product before clicking DELETE button" textFill="RED" visible="false" wrapText="true" StackPane.alignment="CENTER_LEFT" />
+            <Label fx:id="exceptSelectProdLabel" text="Select a product before clicking DELETE" textFill="RED" visible="false" wrapText="true" StackPane.alignment="CENTER_LEFT" />
          </StackPane>
       </VBox>
       <StackPane prefHeight="66.0" prefWidth="200.0">
-         <Button fx:id="exit" mnemonicParsing="false" onAction="#onExit" text="Exit" StackPane.alignment="CENTER" />
+         <Button id="exit" fx:id="exit" mnemonicParsing="false" onAction="#onExit" text="Exit" StackPane.alignment="CENTER" />
       </StackPane>
    </HBox>
    <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
@@ -132,7 +132,7 @@
             <Label fx:id="exceptNoPartsLabel" text="No parts found. Change search input or ADD part" textFill="RED" visible="false" wrapText="true" StackPane.alignment="CENTER_LEFT" />
          </StackPane>
          <StackPane fx:id="exceptSelectPartsPane" managed="false" prefWidth="400.0">
-            <Label fx:id="exceptSelectPartsLabel" text="A part must be selected before clicking DELETE button" textFill="RED" visible="false" wrapText="true" StackPane.alignment="CENTER_LEFT" />
+            <Label fx:id="exceptSelectPartsLabel" text="Select a part before clicking DELETE" textFill="RED" visible="false" wrapText="true" StackPane.alignment="CENTER_LEFT" />
          </StackPane>
       </VBox>
    </HBox>

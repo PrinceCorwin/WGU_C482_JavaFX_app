@@ -6,8 +6,9 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.Objects;
 
-/** FUTURE ENHANCEMENTS - This class creates the AMALFI Makes It Inventory Management Application
+/** FUTURE ENHANCEMENTS - This class creates the AMALFI Makes It Inventory Management Application.
  * Adding a server side database to the application
  * for permanent storage of parts and products would greatly enhance the functionality
  * of the application and would be a necessary step for converting the app to a production
@@ -33,7 +34,8 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/amalfi/wgu_c482/mainScreen.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1200, 600);
-        stage.setTitle("AMALFI Makes It");
+        scene.getStylesheets().add("/style.css");
+        stage.setTitle("AMALFI MAKES IT - Custom Lighting");
         stage.getIcons().add(new Image("/icon3.png"));
         stage.setScene(scene);
         stage.show();

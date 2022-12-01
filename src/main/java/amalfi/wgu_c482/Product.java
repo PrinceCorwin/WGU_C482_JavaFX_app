@@ -3,7 +3,7 @@ package amalfi.wgu_c482;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-/** This class creates the AMALFI Makes It Inventory Management App.
+/** This class creates the product and its attributes.
  * @author Steve Corwin Amalfitano.
  */
 
@@ -130,7 +130,7 @@ public class Product {
      * @param selectedAssociatedPart the part to remove from the associatedParts list for the product
      */
     public boolean deleteAssociatePart(Part selectedAssociatedPart) {
-        associatedParts.remove(selectedAssociatedPart);
+        this.associatedParts.remove(selectedAssociatedPart);
         return true;
     }
 
@@ -138,7 +138,7 @@ public class Product {
      * @return the associatedParts list for the product
      */
     public ObservableList<Part> getAllAssociatedParts() {
-        return associatedParts;
+        return this.associatedParts;
     }
 
 }

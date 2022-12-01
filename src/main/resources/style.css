@@ -1,0 +1,13 @@
+#exit {
+-fx-color: green;
+-fx-background-color: green;
+}
+
+#partsTable {
+-fx-background-color: red;
+}
+
+#searchBarParent {
+-fx-background-color: green;
+
+}

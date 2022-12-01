@@ -77,13 +77,32 @@ public class MainController {
      * @throws IOException Catches any exceptions thrown during data input / output
      */
     public void onModPart(ActionEvent actionEvent) throws IOException {
-        Part part = partsTable.getSelectionModel().getSelectedItem();
-        AddPartController.setModifiedPart(part);
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/amalfi/wgu_c482/addPart.fxml")));
-        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 600, 700);
-        stage.setScene(scene);
-        stage.show();
+        exceptSelectPartsLabel.setVisible(false);
+        exceptSelectPartsPane.setManaged(false);
+        boolean nullPointer = true;
+        Part modPart = partsTable.getSelectionModel().getSelectedItem();
+        try {
+            if (modPart.getName() != null) {
+                nullPointer = false;
+            }
+//            String thisName = modPart.getName();
+//            nullPointer = false;
+        }
+        catch (NullPointerException e) {
+            exceptSelectPartsLabel.setText("Select a part to modify");
+            exceptSelectPartsLabel.setVisible(true);
+            exceptSelectPartsPane.setManaged(true);
+        }
+
+        if (!nullPointer) {
+            Part part = partsTable.getSelectionModel().getSelectedItem();
+            AddPartController.setModifiedPart(part);
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/amalfi/wgu_c482/addPart.fxml")));
+            Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root, 600, 700);
+            stage.setScene(scene);
+            stage.show();
+        }
     }
 
     /**
@@ -95,8 +114,9 @@ public class MainController {
         boolean nullPointer = true;
         Part deletedPart = partsTable.getSelectionModel().getSelectedItem();
         try {
-            String thisName = deletedPart.getName();
-            nullPointer = false;
+                if (deletedPart.getName() != null) {
+                    nullPointer = false;
+                }
         }
         catch (NullPointerException e) {
             exceptSelectPartsLabel.setVisible(true);
@@ -139,19 +159,35 @@ public class MainController {
      * @throws IOException Catches any exceptions thrown during data input / output
      */
     public void onModProd(ActionEvent actionEvent) throws IOException {
-        Product prod = productsTable.getSelectionModel().getSelectedItem();
-        AddProductController.setModifiedProd(prod);
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/amalfi/wgu_c482/addProduct.fxml")));
-        Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 800, 500);
-        stage.setScene(scene);
-        stage.show();
+        exceptSelectProdLabel.setVisible(false);
+        exceptSelectProdPane.setManaged(false);
+        boolean nullPointer = true;
+        Product modProd = productsTable.getSelectionModel().getSelectedItem();
+        try {
+            if (modProd.getName() != null) {
+                nullPointer = false;
+            }
+        }
+        catch (NullPointerException e) {
+            exceptSelectProdLabel.setText("Select a product to modify");
+            exceptSelectProdLabel.setVisible(true);
+            exceptSelectProdPane.setManaged(true);
+        }
+        if (!nullPointer) {
+            AddProductController.setModifiedProd(modProd);
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/amalfi/wgu_c482/addProduct.fxml")));
+            Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root, 900, 500);
+            stage.setScene(scene);
+            stage.show();
+        }
     }
 
     /**
      * Deletes a selected product from inventory and the products table after verifying user intent to delete with alert box
      */
     public void onDelProd() {
+        exceptSelectProdLabel.setText("Select a product before clicking DELETE");
         exceptSelectProdLabel.setVisible(false);
         exceptSelectProdPane.setManaged(false);
         exceptRemoveAssocPartsLabel.setVisible(false);
@@ -159,8 +195,9 @@ public class MainController {
         boolean nullPointer = true;
         Product deletedProduct = productsTable.getSelectionModel().getSelectedItem();
         try {
-            String thisName = deletedProduct.getName();
-            nullPointer = false;
+            if (deletedProduct.getName() != null) {
+                nullPointer = false;
+            }
         }
         catch (NullPointerException e) {
             exceptSelectProdLabel.setVisible(true);

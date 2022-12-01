@@ -252,19 +252,22 @@ public class AddProductController {
                 modifiedProd.setMax(max);
                 modifiedProd.setStock(stock);
                 ObservableList<Part> currentParts = modifiedProd.getAllAssociatedParts();
-                for (Part part :
-                        currentParts) {
-                    if (!associatedParts.contains(part)) {
-                        modifiedProd.deleteAssociatePart(part);
+                if (currentParts.size() != 0) {
+                    for (int i = 0; i < currentParts.size(); i++) {
+                        Part part = currentParts.get(i);
+                        if (!associatedParts.contains(part)) {
+                            modifiedProd.deleteAssociatePart(part);
+                        }
                     }
                 }
-                for (Part part :
-                        associatedParts) {
-                    if(!currentParts.contains(part)) {
-                        modifiedProd.addAssociatePart(part);
+                if (associatedParts.size() != 0) {
+                    for (int i = 0; i < associatedParts.size(); i++) {
+                        Part part = associatedParts.get(i);
+                        if(!currentParts.contains(part)) {
+                            modifiedProd.addAssociatePart(part);
+                        }
                     }
                 }
-
                 int index = Inventory.getAllProducts().indexOf(modifiedProd);
                 Inventory.updateProduct(index, modifiedProd);
             }
