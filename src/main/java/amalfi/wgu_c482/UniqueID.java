@@ -7,6 +7,7 @@ import java.util.ArrayList;
  * As parts and products are deleted, their ids are saved in a list
  * and used first when new ids are needed. This prevents the id integers from
  * growing infinitely.
+ * @author Steve Corwin Amalfitano
  */
 public class UniqueID {
     private static final ArrayList<Integer> availablePartIDs = new ArrayList<>();

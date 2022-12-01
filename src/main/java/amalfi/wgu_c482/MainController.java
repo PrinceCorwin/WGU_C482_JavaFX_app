@@ -19,6 +19,7 @@ import java.util.Optional;
 /**
  * Class to control the mainScreen scene behavior. Displays the parts and products tables, as well as
  * search fields for both. Controls behavior of add, modify and exit buttons.
+ * @author Steve Corwin Amalfitano
  */
 public class MainController {
 

@@ -16,6 +16,7 @@ import java.util.Objects;
 
 /** Controls the behavior of the mainScreen.fxml scene. Provides functionality to either add
  * new part or modify existing part, based on user input into the displayed form.
+ * @author Steve Corwin Amalfitano
  */
 public class AddPartController {
     public TextField partNameField;
@@ -255,7 +256,7 @@ public class AddPartController {
     }
 
     /** RUNTIME ERROR - Initializes the form with existing data if part has been selected and modify button clicked on mainScreen.
-     * Also initializes the search real-time search functionality of the search field
+     * Also initializes the real-time functionality of the search field
      * Being that both the Outsourced and InHouse parts are saved to inventory as the Part class,
      * I was not able to prefill the input fields of the machineID and companyName attributes through the Part superclass methods
      * when modifying an existing part.

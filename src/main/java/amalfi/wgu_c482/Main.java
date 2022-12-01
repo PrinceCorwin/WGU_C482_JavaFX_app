@@ -12,6 +12,7 @@ import java.io.IOException;
  * for permanent storage of parts and products would greatly enhance the functionality
  * of the application and would be a necessary step for converting the app to a production
  * level software version
+ * @author Steve Corwin Amalfitano
  */
 
 public class Main extends Application {

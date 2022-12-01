@@ -19,6 +19,7 @@ import java.util.Optional;
 /**
  * Controls the behavior of the addProduct.fxml scene. Provides functionality to either
  * add new product or modify existing product, based on user input to the displayed form.
+ * @author Steve Corwin Amalfitano
  */
 public class AddProductController {
     public StackPane exceptStockIntPane;
