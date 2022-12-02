@@ -24,92 +24,96 @@
             <Font size="24.0" />
          </font></Label>
    </StackPane>
-   <VBox id="partsTable" prefHeight="200.0" prefWidth="100.0" GridPane.rowIndex="1">
-      <HBox prefHeight="100.0" prefWidth="600.0">
-         <StackPane prefHeight="59.0" prefWidth="200.0">
-            <Label text="Parts" StackPane.alignment="CENTER_LEFT">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-         </StackPane>
-         <StackPane id="searchBarParent" prefHeight="59.0" prefWidth="400.0">
-            <TextField fx:id="searchParts" maxWidth="-Infinity" prefHeight="26.0" prefWidth="200.0" promptText="Search by Part ID or Name" StackPane.alignment="CENTER">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </TextField>
-         </StackPane>
-      </HBox>
-      <TableView fx:id="partsTable" prefHeight="400.0" prefWidth="600.0">
-         <columns>
-            <TableColumn fx:id="partIDCol" prefWidth="125.0" text="Part ID" />
-            <TableColumn fx:id="partNameCol" prefWidth="125.0" text="Part Name" />
-            <TableColumn fx:id="partStockCol" prefWidth="125.0" text="Inventory Level" />
-            <TableColumn fx:id="partPriceCol" prefWidth="125.0" text="Price/Cost per Unit" />
-         </columns>
-      </TableView>
-      <HBox prefHeight="100.0" prefWidth="200.0">
-         <Button fx:id="addPart" mnemonicParsing="false" onAction="#onAddPart" style="-fx-background-color: linear-gradient(#f0ff35, #a9ff00),        radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%); -fx-background-insets: 0,1; -fx-background-radius: 30; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );" text="ADD">
-            <HBox.margin>
-               <Insets right="20.0" />
-            </HBox.margin></Button>
-         <Button fx:id="modPart" mnemonicParsing="false" onAction="#onModPart" style="-fx-background-color: linear-gradient(#f0ff35, #a9ff00),        radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%); -fx-background-insets: 0,1; -fx-background-radius: 30; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );" text="MODIFY" />
-         <Button fx:id="delPart" mnemonicParsing="false" onAction="#onDelPart" style="-fx-background-color: linear-gradient(#ffe8e8, #ffcfcf), radial-gradient(center 50% -40%, radius 200%, #ff5400 45%, #be1d00 50%); -fx-background-insets: 0, 1; -fx-background-radius: 30; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );" text="DELETE" textFill="WHITE">
-            <HBox.margin>
-               <Insets left="50.0" />
-            </HBox.margin></Button>
-         <padding>
-            <Insets top="20.0" />
-         </padding>
-      </HBox>
-      <padding>
-         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-      </padding>
-   </VBox>
-   <VBox layoutX="10.0" layoutY="55.0" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-      <HBox prefHeight="100.0" prefWidth="200.0">
-         <StackPane prefHeight="150.0" prefWidth="200.0">
-            <Label prefWidth="200.0" text="Products" StackPane.alignment="CENTER_LEFT">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-         </StackPane>
-         <StackPane alignment="CENTER_RIGHT" prefHeight="150.0" prefWidth="400.0">
-            <TextField fx:id="searchProds" maxWidth="-Infinity" prefWidth="200.0" promptText="Search by Product ID or Name" StackPane.alignment="CENTER">
-               <font>
-                  <Font size="12.0" />
-               </font>
-            </TextField>
-         </StackPane>
-      </HBox>
-      <TableView fx:id="productsTable" prefHeight="400.0" prefWidth="600.0">
-         <columns>
-            <TableColumn fx:id="prodIDCol" prefWidth="125.0" text="Product ID" />
-            <TableColumn fx:id="prodNameCol" prefWidth="125.0" text="Product Name" />
-            <TableColumn fx:id="prodStockCol" prefWidth="125.0" text="Inventory Level" />
-            <TableColumn fx:id="prodPriceCol" prefWidth="125.0" text="Price/Cost per Unit" />
-         </columns>
-      </TableView>
-      <HBox prefHeight="100.0" prefWidth="200.0">
-         <Button fx:id="addProd" mnemonicParsing="false" onAction="#onAddProd" style="-fx-background-color: linear-gradient(#f0ff35, #a9ff00),        radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%); -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 ); -fx-background-radius: 30; -fx-background-insets: 0, 1;" text="ADD" textFill="#395306">
-            <HBox.margin>
-               <Insets right="20.0" />
-            </HBox.margin></Button>
-         <Button fx:id="modProd" mnemonicParsing="false" onAction="#onModProd" style="-fx-background-color: linear-gradient(#f0ff35, #a9ff00),        radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%); -fx-background-insets: 0, 1; -fx-background-radius: 30; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );" text="MODIFY" textFill="#395306" />
-         <Button fx:id="delProd" mnemonicParsing="false" onAction="#onDelProd" style="-fx-background-color: linear-gradient(#ffe8e8, #ffcfcf), radial-gradient(center 50% -40%, radius 200%, #ff5400 45%, #be1d00 50%);; -fx-background-radius: 30; -fx-background-insets: 0, 1; -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 );" text="DELETE" textFill="#eeeeee">
-            <HBox.margin>
-               <Insets left="50.0" />
-            </HBox.margin></Button>
-         <padding>
-            <Insets top="20.0" />
-         </padding>
-      </HBox>
-      <padding>
-         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-      </padding>
-   </VBox>
+   <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="tablePane" GridPane.rowIndex="1">
+      <VBox prefHeight="200.0" prefWidth="100.0" styleClass="tableMain">
+         <HBox prefHeight="100.0" prefWidth="600.0">
+            <StackPane prefHeight="59.0" prefWidth="200.0">
+               <Label text="Parts" StackPane.alignment="CENTER_LEFT">
+                  <font>
+                     <Font name="System Bold" size="18.0" />
+                  </font>
+               </Label>
+            </StackPane>
+            <StackPane prefHeight="59.0" prefWidth="400.0">
+               <TextField fx:id="searchParts" maxWidth="-Infinity" prefHeight="26.0" prefWidth="200.0" promptText="Search by Part ID or Name" StackPane.alignment="CENTER">
+                  <font>
+                     <Font size="12.0" />
+                  </font>
+               </TextField>
+            </StackPane>
+         </HBox>
+         <TableView fx:id="partsTable" prefHeight="400.0" prefWidth="600.0">
+            <columns>
+               <TableColumn fx:id="partIDCol" prefWidth="125.0" text="Part ID" />
+               <TableColumn fx:id="partNameCol" prefWidth="125.0" text="Part Name" />
+               <TableColumn fx:id="partStockCol" prefWidth="125.0" text="Inventory Level" />
+               <TableColumn fx:id="partPriceCol" prefWidth="125.0" text="Price/Cost per Unit" />
+            </columns>
+         </TableView>
+         <HBox prefHeight="100.0" prefWidth="200.0">
+            <Button fx:id="addPart" mnemonicParsing="false" onAction="#onAddPart" styleClass="roundBtn, greenBtn" text="ADD">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="modPart" mnemonicParsing="false" onAction="#onModPart" styleClass="roundBtn, greenBtn" text="MODIFY" />
+            <Button fx:id="delPart" mnemonicParsing="false" onAction="#onDelPart" styleClass="roundBtn, deleteBtn" text="DELETE" textFill="WHITE">
+               <HBox.margin>
+                  <Insets left="50.0" />
+               </HBox.margin>
+            </Button>
+            <padding>
+               <Insets top="20.0" />
+            </padding>
+         </HBox>
+      </VBox>
+   </StackPane>
+   <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="tablePane" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <children>
+         <VBox prefHeight="200.0" prefWidth="100.0" styleClass="tableMain">
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <StackPane prefHeight="150.0" prefWidth="200.0">
+                  <Label prefWidth="200.0" text="Products" StackPane.alignment="CENTER_LEFT">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Label>
+               </StackPane>
+               <StackPane alignment="CENTER_RIGHT" prefHeight="150.0" prefWidth="400.0">
+                  <TextField fx:id="searchProds" maxWidth="-Infinity" prefWidth="200.0" promptText="Search by Product ID or Name" StackPane.alignment="CENTER">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </TextField>
+               </StackPane>
+            </HBox>
+            <TableView fx:id="productsTable" prefHeight="400.0" prefWidth="600.0">
+               <columns>
+                  <TableColumn fx:id="prodIDCol" prefWidth="125.0" text="Product ID" />
+                  <TableColumn fx:id="prodNameCol" prefWidth="125.0" text="Product Name" />
+                  <TableColumn fx:id="prodStockCol" prefWidth="125.0" text="Inventory Level" />
+                  <TableColumn fx:id="prodPriceCol" prefWidth="125.0" text="Price/Cost per Unit" />
+               </columns>
+            </TableView>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <Button fx:id="addProd" mnemonicParsing="false" onAction="#onAddProd" styleClass="roundBtn, greenBtn" text="ADD" textFill="#395306">
+                  <HBox.margin>
+                     <Insets right="20.0" />
+                  </HBox.margin>
+               </Button>
+               <Button fx:id="modProd" mnemonicParsing="false" onAction="#onModProd" styleClass="roundBtn, greenBtn" text="MODIFY" textFill="#395306" />
+               <Button fx:id="delProd" mnemonicParsing="false" onAction="#onDelProd" styleClass="roundBtn, deleteBtn" text="DELETE" textFill="#eeeeee">
+                  <HBox.margin>
+                     <Insets left="50.0" />
+                  </HBox.margin>
+               </Button>
+               <padding>
+                  <Insets top="20.0" />
+               </padding>
+            </HBox>
+         </VBox>
+      </children>
+   </StackPane>
    <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="600.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
       <VBox prefHeight="200.0" prefWidth="400.0">
          <StackPane fx:id="exceptRemoveAssocPartsPane" managed="false" prefWidth="400.0">
@@ -123,7 +127,7 @@
          </StackPane>
       </VBox>
       <StackPane prefHeight="66.0" prefWidth="200.0">
-         <Button id="exit" fx:id="exit" mnemonicParsing="false" onAction="#onExit" text="Exit" StackPane.alignment="CENTER" />
+         <Button id="exitBtn" fx:id="exit" mnemonicParsing="false" onAction="#onExit" text="Exit" StackPane.alignment="CENTER" />
       </StackPane>
    </HBox>
    <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">

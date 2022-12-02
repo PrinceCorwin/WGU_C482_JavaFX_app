@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="700.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="amalfi.wgu_c482.AddPartController">
+<AnchorPane prefHeight="700.0" prefWidth="600.0" stylesheets="@/style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="amalfi.wgu_c482.AddPartController">
    <padding>
       <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
    </padding>
-   <VBox prefHeight="600.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+   <VBox prefHeight="600.0" prefWidth="600.0" styleClass="tableMain" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       <HBox prefHeight="100.0" prefWidth="600.0">
          <StackPane prefHeight="150.0" prefWidth="200.0">
             <Label fx:id="titleLabel" text="Add Part">
@@ -92,10 +93,14 @@
       </GridPane>
       <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="560.0">
          <StackPane prefHeight="100.0" prefWidth="110.0">
-            <Button fx:id="partSave" mnemonicParsing="false" onAction="#onPartSave" text="Save" StackPane.alignment="CENTER" />
+            <Button fx:id="partSave" mnemonicParsing="false" onAction="#onPartSave" text="Save" StackPane.alignment="CENTER">
+               <styleClass>
+                  <String fx:value="roundBtn" />
+                  <String fx:value="greenBtn" />
+               </styleClass></Button>
          </StackPane>
          <StackPane prefHeight="100.0" prefWidth="211.0">
-            <Button fx:id="partCancel" mnemonicParsing="false" onAction="#onPartCancel" text="Cancel" StackPane.alignment="CENTER_LEFT" />
+            <Button fx:id="partCancel" mnemonicParsing="false" onAction="#onPartCancel" styleClass="roundBtn, deleteBtn" text="Cancel" StackPane.alignment="CENTER_LEFT" />
          </StackPane>
       </HBox>
       <VBox prefHeight="150.0" prefWidth="100.0">

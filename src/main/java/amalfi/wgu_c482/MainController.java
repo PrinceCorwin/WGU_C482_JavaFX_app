@@ -147,7 +147,7 @@ public class MainController {
     public void onAddProd(ActionEvent actionEvent) throws IOException {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/amalfi/wgu_c482/addProduct.fxml")));
         Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-        Scene scene = new Scene(root, 900, 500);
+        Scene scene = new Scene(root, 1000, 600);
         stage.setScene(scene);
         stage.show();
     }

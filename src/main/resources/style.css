@@ -1,13 +1,30 @@
-#exit {
--fx-color: green;
--fx-background-color: green;
+#exitBtn {
+-fx-background-color: black;
+-fx-text-fill: white;
 }
 
-#partsTable {
--fx-background-color: red;
+.tablePane {
+-fx-padding: 10px;
 }
 
-#searchBarParent {
--fx-background-color: green;
-
+.tableMain {
+-fx-padding: 20px;
+-fx-border-radius: 3px;
+-fx-background-radius: 3px;
+-fx-background-color: linear-gradient(#087E00, #085603);
+-fx-background-color: #DBEEE5;
+-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 2 , 2 );
+}
+.roundBtn {
+-fx-text-fill: #395306;
+-fx-background-insets:  0, 1;
+-fx-background-radius:  30px;
+-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 0 , 1 )
+}
+.deleteBtn {
+-fx-text-fill: #eeeeee;
+-fx-background-color:  linear-gradient(#ffe8e8, #ffcfcf), radial-gradient(center 50% -40%, radius 200%, #ff5400 45%, #be1d00 50%);
+}
+.greenBtn {
+-fx-background-color:  linear-gradient(#f0ff35, #a9ff00),        radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%)
 }
