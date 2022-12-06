@@ -19,7 +19,7 @@
       <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
    </padding>
    <StackPane prefHeight="150.0" prefWidth="200.0">
-      <Label style="-fx-font-family: Verdana;" text="Inventory Management System" StackPane.alignment="CENTER">
+      <Label style="-fx-font-family: Verdana;" text="A.M.I. Inventory Management System" StackPane.alignment="CENTER">
          <font>
             <Font size="24.0" />
          </font></Label>
