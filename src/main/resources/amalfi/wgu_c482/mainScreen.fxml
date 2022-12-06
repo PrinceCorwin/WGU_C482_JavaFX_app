@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" stylesheets="@../../style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="amalfi.wgu_c482.MainController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: #4A4A4A;" stylesheets="@../../style.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="amalfi.wgu_c482.MainController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -20,7 +20,7 @@
       <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
    </padding>
    <StackPane prefHeight="150.0" prefWidth="600.0">
-      <Label style="-fx-font-family: Verdana;" text="A.M.I. Inventory Management System" StackPane.alignment="CENTER">
+      <Label text="A.M.I. Inventory Management System" textFill="#eeeeee" StackPane.alignment="CENTER">
          <font>
             <Font size="24.0" />
          </font></Label>
@@ -29,7 +29,7 @@
       <VBox prefHeight="200.0" prefWidth="100.0" styleClass="tableMain">
          <HBox prefHeight="100.0" prefWidth="600.0">
             <StackPane prefHeight="59.0" prefWidth="200.0">
-               <Label text="Parts" StackPane.alignment="CENTER_LEFT">
+               <Label text="PARTS" textFill="#4a4a4a" StackPane.alignment="CENTER_LEFT">
                   <font>
                      <Font name="System Bold" size="18.0" />
                   </font>
@@ -83,7 +83,7 @@
          <VBox prefHeight="200.0" prefWidth="100.0" styleClass="tableMain">
             <HBox prefHeight="100.0" prefWidth="200.0">
                <StackPane prefHeight="150.0" prefWidth="200.0">
-                  <Label prefWidth="200.0" text="Products" StackPane.alignment="CENTER_LEFT">
+                  <Label prefWidth="200.0" text="PRODUCTS" textFill="#4a4a4a" StackPane.alignment="CENTER_LEFT">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
