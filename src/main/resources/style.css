@@ -10,7 +10,7 @@
 -fx-background-radius: 3px;
 -fx-background-color: linear-gradient(#087E00, #085603);
 -fx-background-color: #DBEEE5;
--fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 5, 0.0 , 2 , 2 );
+-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.4) , 10, 0 , 5 , 5 );
 }
 .roundBtn {
 -fx-text-fill: #395306;

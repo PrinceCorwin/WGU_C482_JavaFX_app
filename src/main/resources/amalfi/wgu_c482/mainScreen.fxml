@@ -19,13 +19,13 @@
    <padding>
       <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
    </padding>
-   <StackPane prefHeight="150.0" prefWidth="200.0">
+   <StackPane prefHeight="150.0" prefWidth="600.0">
       <Label style="-fx-font-family: Verdana;" text="A.M.I. Inventory Management System" StackPane.alignment="CENTER">
          <font>
             <Font size="24.0" />
          </font></Label>
    </StackPane>
-   <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="tablePane" GridPane.rowIndex="1">
+   <StackPane prefHeight="150.0" prefWidth="600.0" styleClass="tablePane" GridPane.rowIndex="1">
       <VBox prefHeight="200.0" prefWidth="100.0" styleClass="tableMain">
          <HBox prefHeight="100.0" prefWidth="600.0">
             <StackPane prefHeight="59.0" prefWidth="200.0">
@@ -52,28 +52,33 @@
             </columns>
          </TableView>
          <HBox prefHeight="100.0" prefWidth="200.0">
-            <Button fx:id="addPart" mnemonicParsing="false" onAction="#onAddPart" styleClass="roundBtn, greenBtn" text="ADD">
-               <HBox.margin>
-                  <Insets right="20.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="modPart" mnemonicParsing="false" onAction="#onModPart" text="MODIFY">
-               <styleClass>
-                  <String fx:value="roundBtn" />
-                  <String fx:value="blueBtn" />
-               </styleClass></Button>
-            <Button fx:id="delPart" mnemonicParsing="false" onAction="#onDelPart" styleClass="roundBtn, deleteBtn" text="DELETE" textFill="WHITE">
-               <HBox.margin>
-                  <Insets left="50.0" />
-               </HBox.margin>
-            </Button>
+            <StackPane alignment="CENTER_LEFT" prefHeight="150.0" prefWidth="100.0">
+               <children>
+                  <Button fx:id="addPart" mnemonicParsing="false" onAction="#onAddPart" styleClass="roundBtn, greenBtn" text="ADD" />
+               </children>
+            </StackPane>
+            <StackPane alignment="CENTER_LEFT" prefHeight="150.0" prefWidth="100.0">
+               <children>
+                  <Button fx:id="modPart" mnemonicParsing="false" onAction="#onModPart" text="MODIFY">
+                     <styleClass>
+                        <String fx:value="roundBtn" />
+                        <String fx:value="blueBtn" />
+                     </styleClass>
+                  </Button>
+               </children>
+            </StackPane>
+            <StackPane alignment="CENTER_RIGHT" prefHeight="150.0" prefWidth="400.0">
+               <children>
+                  <Button fx:id="delPart" mnemonicParsing="false" onAction="#onDelPart" styleClass="roundBtn, deleteBtn" text="DELETE" textFill="WHITE" />
+               </children>
+            </StackPane>
             <padding>
                <Insets top="20.0" />
             </padding>
          </HBox>
       </VBox>
    </StackPane>
-   <StackPane prefHeight="150.0" prefWidth="200.0" styleClass="tablePane" GridPane.columnIndex="1" GridPane.rowIndex="1">
+   <StackPane prefHeight="150.0" prefWidth="600.0" styleClass="tablePane" GridPane.columnIndex="1" GridPane.rowIndex="1">
       <children>
          <VBox prefHeight="200.0" prefWidth="100.0" styleClass="tableMain">
             <HBox prefHeight="100.0" prefWidth="200.0">
@@ -101,21 +106,26 @@
                </columns>
             </TableView>
             <HBox prefHeight="100.0" prefWidth="200.0">
-               <Button fx:id="addProd" mnemonicParsing="false" onAction="#onAddProd" styleClass="roundBtn, greenBtn" text="ADD" textFill="#395306">
-                  <HBox.margin>
-                     <Insets right="20.0" />
-                  </HBox.margin>
-               </Button>
-               <Button fx:id="modProd" mnemonicParsing="false" onAction="#onModProd" text="MODIFY" textFill="#395306">
-                  <styleClass>
-                     <String fx:value="roundBtn" />
-                     <String fx:value="blueBtn" />
-                  </styleClass></Button>
-               <Button fx:id="delProd" mnemonicParsing="false" onAction="#onDelProd" styleClass="roundBtn, deleteBtn" text="DELETE" textFill="#eeeeee">
-                  <HBox.margin>
-                     <Insets left="50.0" />
-                  </HBox.margin>
-               </Button>
+               <StackPane alignment="CENTER_LEFT" prefHeight="150.0" prefWidth="100.0">
+                  <children>
+                     <Button fx:id="addProd" mnemonicParsing="false" onAction="#onAddProd" styleClass="roundBtn, greenBtn" text="ADD" textFill="#395306" />
+                  </children>
+               </StackPane>
+               <StackPane alignment="CENTER_LEFT" prefHeight="150.0" prefWidth="100.0">
+                  <children>
+                     <Button fx:id="modProd" mnemonicParsing="false" onAction="#onModProd" text="MODIFY" textFill="#395306">
+                        <styleClass>
+                           <String fx:value="roundBtn" />
+                           <String fx:value="blueBtn" />
+                        </styleClass>
+                     </Button>
+                  </children>
+               </StackPane>
+               <StackPane alignment="CENTER_RIGHT" prefHeight="150.0" prefWidth="400.0">
+                  <children>
+                     <Button fx:id="delProd" mnemonicParsing="false" onAction="#onDelProd" styleClass="roundBtn, deleteBtn" text="DELETE" textFill="#eeeeee" />
+                  </children>
+               </StackPane>
                <padding>
                   <Insets top="20.0" />
                </padding>
@@ -143,7 +153,7 @@
             </styleClass></Button>
       </StackPane>
    </HBox>
-   <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+   <HBox prefHeight="100.0" prefWidth="600.0" GridPane.rowIndex="2">
       <VBox prefHeight="400.0">
          <StackPane fx:id="exceptNoPartsPane" managed="false" prefWidth="400.0">
             <Label fx:id="exceptNoPartsLabel" text="No parts found. Change search input or ADD part" textFill="RED" visible="false" wrapText="true" StackPane.alignment="CENTER_LEFT" />
