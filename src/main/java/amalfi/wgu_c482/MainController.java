@@ -57,6 +57,8 @@ public class MainController {
     @FXML
     private TextField searchProds;
 
+
+
     /**
      * Upon button click, scene is replaced by the addPart.fxml scene for a new part to be added
      * @param actionEvent the action event
@@ -109,6 +111,7 @@ public class MainController {
      * Deletes a selected part from Inventory and the parts table after verifying intent to delete from user
      */
     public void onDelPart() {
+        exceptSelectPartsLabel.setText("Select a part before clicking DELETE");
         exceptSelectPartsLabel.setVisible(false);
         exceptSelectPartsPane.setManaged(false);
         boolean nullPointer = true;
@@ -177,7 +180,7 @@ public class MainController {
             AddProductController.setModifiedProd(modProd);
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/amalfi/wgu_c482/addProduct.fxml")));
             Stage stage = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root, 900, 500);
+            Scene scene = new Scene(root, 1000, 600);
             stage.setScene(scene);
             stage.show();
         }
@@ -248,6 +251,16 @@ public class MainController {
         prodNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         prodStockCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         prodPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+
+        partIDCol.prefWidthProperty().bind(partsTable.widthProperty().divide(4));
+        partNameCol.prefWidthProperty().bind(partsTable.widthProperty().divide(4));
+        partStockCol.prefWidthProperty().bind(partsTable.widthProperty().divide(4));
+        partPriceCol.prefWidthProperty().bind(partsTable.widthProperty().divide(4));
+
+        prodIDCol.prefWidthProperty().bind(productsTable.widthProperty().divide(4));
+        prodNameCol.prefWidthProperty().bind(productsTable.widthProperty().divide(4));
+        prodStockCol.prefWidthProperty().bind(productsTable.widthProperty().divide(4));
+        prodPriceCol.prefWidthProperty().bind(productsTable.widthProperty().divide(4));
 
         searchParts.textProperty().addListener((obs, oldText, newText) -> {
             exceptNoPartsLabel.setVisible(false);

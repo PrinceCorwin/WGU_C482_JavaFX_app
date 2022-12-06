@@ -26,5 +26,25 @@
 -fx-background-color:  linear-gradient(#ffe8e8, #ffcfcf), radial-gradient(center 50% -40%, radius 200%, #ff5400 45%, #be1d00 50%);
 }
 .greenBtn {
--fx-background-color:  linear-gradient(#f0ff35, #a9ff00),        radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%)
+-fx-background-color:  linear-gradient(#f0ff35, #a9ff00), radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%)
+}
+
+
+.table-view .column-header-background {
+-fx-background-color: linear-gradient(#009BA6,#00656C);
+
+}
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-border-color: #DBEEE5;
+    -fx-border-width: 0px 1px 0px 0px;
+
+}
+.table-view .column-header .label {
+    -fx-text-fill: #eeeeee;
+    -fx-font-weight: bold;
+}
+
+.table-view .column-header .table-row-cell {
+
 }
