@@ -1,7 +1,4 @@
-#exitBtn {
--fx-background-color: black;
--fx-text-fill: white;
-}
+
 
 .tablePane {
 -fx-padding: 10px;
@@ -26,9 +23,18 @@
 -fx-background-color:  linear-gradient(#ffe8e8, #ffcfcf), radial-gradient(center 50% -40%, radius 200%, #ff5400 45%, #be1d00 50%);
 }
 .greenBtn {
--fx-background-color:  linear-gradient(#f0ff35, #a9ff00), radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%)
+-fx-background-color:  linear-gradient(#f0ff35, #a9ff00), radial-gradient(center 50% -40%, radius 200%, #b8ee36 45%, #80c800 50%);
 }
+.blueBtn {
+-fx-background-color:  linear-gradient(#f0ff35, #a9ff00), radial-gradient(center 50% -40%, radius 200%, #009BA6 45%, #00656C 50%);
+-fx-text-fill: #eeeeee;
 
+}
+.exitBtn {
+-fx-text-fill: #eeeeee;
+-fx-background-color:  linear-gradient(white, FFFFF4), radial-gradient(center 50% -40%, radius 200%, #575757 45%, black 50%)
+
+}
 
 .table-view .column-header-background {
 -fx-background-color: linear-gradient(#009BA6,#00656C);

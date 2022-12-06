@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -56,7 +57,11 @@
                   <Insets right="20.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="modPart" mnemonicParsing="false" onAction="#onModPart" styleClass="roundBtn, greenBtn" text="MODIFY" />
+            <Button fx:id="modPart" mnemonicParsing="false" onAction="#onModPart" text="MODIFY">
+               <styleClass>
+                  <String fx:value="roundBtn" />
+                  <String fx:value="blueBtn" />
+               </styleClass></Button>
             <Button fx:id="delPart" mnemonicParsing="false" onAction="#onDelPart" styleClass="roundBtn, deleteBtn" text="DELETE" textFill="WHITE">
                <HBox.margin>
                   <Insets left="50.0" />
@@ -101,7 +106,11 @@
                      <Insets right="20.0" />
                   </HBox.margin>
                </Button>
-               <Button fx:id="modProd" mnemonicParsing="false" onAction="#onModProd" styleClass="roundBtn, greenBtn" text="MODIFY" textFill="#395306" />
+               <Button fx:id="modProd" mnemonicParsing="false" onAction="#onModProd" text="MODIFY" textFill="#395306">
+                  <styleClass>
+                     <String fx:value="roundBtn" />
+                     <String fx:value="blueBtn" />
+                  </styleClass></Button>
                <Button fx:id="delProd" mnemonicParsing="false" onAction="#onDelProd" styleClass="roundBtn, deleteBtn" text="DELETE" textFill="#eeeeee">
                   <HBox.margin>
                      <Insets left="50.0" />
@@ -127,7 +136,11 @@
          </StackPane>
       </VBox>
       <StackPane prefHeight="66.0" prefWidth="200.0">
-         <Button id="exitBtn" fx:id="exit" mnemonicParsing="false" onAction="#onExit" text="Exit" StackPane.alignment="CENTER" />
+         <Button id="exitBtn" fx:id="exit" mnemonicParsing="false" onAction="#onExit" text="Exit" StackPane.alignment="CENTER">
+            <styleClass>
+               <String fx:value="roundBtn" />
+               <String fx:value="exitBtn" />
+            </styleClass></Button>
       </StackPane>
    </HBox>
    <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
