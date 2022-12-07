@@ -308,6 +308,16 @@ public class AddProductController {
         partStockAssocCol.setCellValueFactory(new PropertyValueFactory<>("stock"));
         partPriceAssocCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
+        partIdSearchCol.prefWidthProperty().bind(partsTableSearch.widthProperty().divide(4));
+        partNameSearchCol.prefWidthProperty().bind(partsTableSearch.widthProperty().divide(4));
+        partStockSearchCol.prefWidthProperty().bind(partsTableSearch.widthProperty().divide(4));
+        partPriceSearchCol.prefWidthProperty().bind(partsTableSearch.widthProperty().divide(4));
+
+        partIdAssocCol.prefWidthProperty().bind(partsTableAssoc.widthProperty().divide(4));
+        partNameAssocCol.prefWidthProperty().bind(partsTableAssoc.widthProperty().divide(4));
+        partStockAssocCol.prefWidthProperty().bind(partsTableAssoc.widthProperty().divide(4));
+        partPriceAssocCol.prefWidthProperty().bind(partsTableAssoc.widthProperty().divide(4));
+
         if(modifiedProd != null) {
             titleLabel.setText("Modify Product");
             prodNameField.setText(modifiedProd.getName());
